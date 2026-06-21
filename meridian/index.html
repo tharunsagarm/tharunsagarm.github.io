@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meridian Estates — Cinematic Luxury Real Estate</title>
+  <meta name="description" content="Meridian Estates — A curated collection of ultra-luxury architectural masterworks. Experience silent luxury, exquisite design, and cinematic living." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* RESET & CORE VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-dark: #070707;
+      --bg-card: #111111;
+      --bg-card-hover: #161616;
+      --gold: #D4AF37;
+      --gold-dark: #AA820A;
+      --gold-glow: rgba(212, 175, 55, 0.15);
+      --gold-glow-strong: rgba(212, 175, 55, 0.4);
+      --white: #FFFFFF;
+      --text-muted: #A3A3A3;
+      --text-dark: #737373;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(212, 175, 55, 0.2);
+      
+      --font-display: 'Cinzel', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold-dark);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gold);
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* PARALLAX PARTICLES BACKGROUND */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.02) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* GLOBAL UTILITIES & REVEAL ANIMATIONS */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 500;
+      letter-spacing: 4px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.2rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--bg-dark);
+      border: 1px solid var(--gold);
+    }
+
+    .btn-gold:hover {
+      background: transparent;
+      color: var(--gold);
+      box-shadow: 0 0 20px var(--gold-glow-strong);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 15px var(--gold-glow);
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      transition: var(--transition-fast);
+      border-bottom: 1px solid transparent;
+    }
+
+    header.scrolled {
+      background: rgba(7, 7, 7, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 6px;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      color: var(--gold);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      position: relative;
+      padding: 0.5rem 0;
+      transition: var(--transition-fast);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--white);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-cta .btn {
+      padding: 0.6rem 1.4rem;
+      font-size: 0.75rem;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 1px;
+      background: var(--white);
+      transition: var(--transition-fast);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(to bottom, rgba(7, 7, 7, 0.4), rgba(7, 7, 7, 0.95)), 
+                        url('images/obsidian_villa.png');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      animation: zoomOut 20s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: -1;
+    }
+
+    @keyframes zoomOut {
+      to { transform: scale(1); }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: heroFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+
+    @keyframes heroFadeIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-gold);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--gold);
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--gold);
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+      box-shadow: 0 0 5px var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      z-index: 2;
+    }
+
+    .scroll-mouse {
+      width: 20px;
+      height: 35px;
+      border: 1px solid var(--text-dark);
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 3px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scrollMove 2s infinite;
+    }
+
+    @keyframes scrollMove {
+      0% { top: 6px; opacity: 1; }
+      100% { top: 20px; opacity: 0; }
+    }
+
+    /* SECTION LAYOUTS */
+    section {
+      padding: 8rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* FEATURED RESIDENCES */
+    .residences-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .residence-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .residence-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold-dark);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .residence-img-container {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .residence-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .residence-card:hover .residence-img {
+      transform: scale(1.08);
+    }
+
+    .residence-price-badge {
+      position: absolute;
+      bottom: 1.2rem;
+      right: 1.2rem;
+      background: rgba(7, 7, 7, 0.85);
+      border: 1px solid var(--border-gold);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .residence-details {
+      padding: 2rem;
+    }
+
+    .residence-loc {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .residence-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .residence-specs {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-item {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .spec-item span {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-top: 0.2rem;
+    }
+
+    .residence-card-link {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-fast);
+    }
+
+    .residence-card-link span {
+      transition: transform 0.3s ease;
+    }
+
+    .residence-card:hover .residence-card-link {
+      color: var(--gold);
+    }
+
+    .residence-card:hover .residence-card-link span {
+      transform: translateX(5px);
+    }
+
+    /* INTERACTIVE VIRTUAL TOUR SWITCHER */
+    .tour-section {
+      background: linear-gradient(to bottom, #070707, #0d0d0d);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tour-container {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .tour-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .tour-menu-item {
+      padding: 1.5rem 2rem;
+      border-left: 2px solid var(--border);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .tour-menu-item.active {
+      border-color: var(--gold);
+      background: linear-gradient(to right, rgba(212, 175, 55, 0.05), transparent);
+    }
+
+    .tour-num {
+      font-size: 0.75rem;
+      color: var(--text-dark);
+      letter-spacing: 2px;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .tour-menu-item.active .tour-num {
+      color: var(--gold);
+    }
+
+    .tour-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .tour-menu-item.active .tour-title {
+      color: var(--white);
+      letter-spacing: 3px;
+    }
+
+    .tour-display {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .tour-frame {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tour-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 0.8s ease-in-out, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tour-img.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 1;
+    }
+
+    .tour-caption {
+      margin-top: 1.5rem;
+      padding: 0.5rem;
+      min-height: 100px;
+    }
+
+    .tour-caption-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition-smooth);
+    }
+
+    .tour-caption-title.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tour-caption-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition-smooth);
+      transition-delay: 0.1s;
+    }
+
+    .tour-caption-desc.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* LOCATIONS: CITIES AT DUSK */
+    .cities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .city-card {
+      position: relative;
+      height: 480px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .city-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: grayscale(20%) brightness(80%);
+    }
+
+    .city-card:hover .city-bg {
+      transform: scale(1.1);
+    }
+
+    .city-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(7, 7, 7, 0.95) 90%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem 2.5rem;
+      z-index: 2;
+    }
+
+    .city-name {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .city-name::after {
+      content: '';
+      position: absolute;
+      bottom: -0.4rem;
+      left: 0;
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      transition: var(--transition-smooth);
+    }
+
+    .city-card:hover .city-name::after {
+      width: 100px;
+    }
+
+    .city-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    /* CLIENT TESTIMONIALS */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-top: 1rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      position: relative;
+      transition: var(--transition-fast);
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--gold-dark);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .quote-icon {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--gold-glow-strong);
+      position: absolute;
+      top: 1.5rem;
+      left: 2rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.8;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 2rem;
+    }
+
+    .client-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .client-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .client-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .client-title {
+      font-size: 0.75rem;
+      color: var(--text-dark);
+      margin-top: 0.1rem;
+    }
+
+    /* ENQUIRY FORM */
+    .enquiry-section {
+      background: linear-gradient(to top, #070707, #0d0d0d);
+      border-top: 1px solid var(--border);
+    }
+
+    .enquiry-container {
+      max-width: 750px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 4rem 3rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .form-full {
+      grid-column: span 2;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--white);
+      transition: var(--transition-fast);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    select.form-control {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M10.293,3.293,6,7.586,1.707,3.293A1,1,0,0,0,.293,4.707l5,5a1,1,0,0,0,1.414,0l5-5a1,1,0,1,0-1.414-1.414Z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1.2rem center;
+      padding-right: 3rem;
+    }
+
+    select.form-control option {
+      background-color: var(--bg-card);
+      color: var(--white);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit-container {
+      margin-top: 3rem;
+      text-align: center;
+      grid-column: span 2;
+    }
+
+    .form-submit-container .btn {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .success-overlay {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    .success-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      color: var(--white);
+    }
+
+    .success-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 420px;
+      line-height: 1.7;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* FOOTER */
+    footer {
+      background: #040404;
+      border-top: 1px solid var(--border);
+      padding: 6rem 0 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 4rem;
+      margin-bottom: 5rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+    }
+
+    .footer-logo span {
+      color: var(--gold);
+    }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 320px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: var(--transition-fast);
+      letter-spacing: 1px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      padding-left: 5px;
+    }
+
+    .footer-contact-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .footer-contact-item span {
+      display: block;
+      color: var(--white);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .copyright {
+      font-size: 0.75rem;
+      color: var(--text-dark);
+      letter-spacing: 1px;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-legal a {
+      font-size: 0.75rem;
+      color: var(--text-dark);
+      transition: var(--transition-fast);
+    }
+
+    .footer-legal a:hover {
+      color: var(--text-muted);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      .tour-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 5rem 0;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background: rgba(7, 7, 7, 0.98);
+        backdrop-filter: blur(20px);
+        border-left: 1px solid var(--border);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transition: var(--transition-smooth);
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .nav-cta {
+        display: none; /* Hide top CTA on mobile */
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        gap: 1rem;
+      }
+
+      .hero-btns .btn {
+        width: 100%;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .form-full, .form-submit-container {
+        grid-column: span 1;
+      }
+
+      .tour-frame {
+        height: 280px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Ambient Glow -->
+  <div class="ambient-bg"></div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="header">
+    <div class="nav-container">
+      <a href="#hero" class="logo">
+        MERIDIAN<span>.</span>
+      </a>
+      
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#residences" class="nav-link">Residences</a></li>
+        <li><a href="#tour" class="nav-link">Virtual Tour</a></li>
+        <li><a href="#testimonials" class="nav-link">Accolades</a></li>
+        <li><a href="#enquire" class="nav-link">Enquire</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#enquire" class="btn btn-outline">Enquire Now</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Exquisite Living
+      </div>
+      <h1 class="hero-title">
+        The Architecture of <span>Silent Luxury</span>
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">
+        A private portfolio of ultra-luxury architectural masterworks. Sculpted spaces celebrating light, water, and panoramic landscape.
+      </p>
+      <div class="hero-btns">
+        <a href="#residences" class="btn btn-gold">View Estates</a>
+        <a href="#tour" class="btn btn-outline">Virtual Walkthrough</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Scroll Down</span>
+    </div>
+  </section>
+
+  <!-- FEATURED RESIDENCES -->
+  <section id="residences" class="residences">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Featured Estates</h2>
+        <p class="section-subtitle">Sculptures of Light & Landscape</p>
+      </div>
+
+      <div class="residences-grid">
+        
+        <!-- Residence 1 -->
+        <div class="residence-card reveal">
+          <div class="residence-img-container">
+            <img src="images/obsidian_villa.png" alt="The Obsidian Villa" class="residence-img" />
+            <div class="residence-price-badge">$18,500,000</div>
+          </div>
+          <div class="residence-details">
+            <div class="residence-loc">Malibu, California</div>
+            <h3 class="residence-name">The Obsidian Villa</h3>
+            <div class="residence-specs">
+              <div class="spec-item">Beds<span>6</span></div>
+              <div class="spec-item">Baths<span>8</span></div>
+              <div class="spec-item">Area<span>12,000 SF</span></div>
+            </div>
+            <a href="#enquire" class="residence-card-link" onclick="selectProperty('Obsidian Villa')">
+              Request Showing <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Residence 2 -->
+        <div class="residence-card reveal">
+          <div class="residence-img-container">
+            <img src="images/aurelia_manor.png" alt="Aurelia Manor" class="residence-img" />
+            <div class="residence-price-badge">$24,000,000</div>
+          </div>
+          <div class="residence-details">
+            <div class="residence-loc">Aspen, Colorado</div>
+            <h3 class="residence-name">Aurelia Manor</h3>
+            <div class="residence-specs">
+              <div class="spec-item">Beds<span>7</span></div>
+              <div class="spec-item">Baths<span>9</span></div>
+              <div class="spec-item">Area<span>15,500 SF</span></div>
+            </div>
+            <a href="#enquire" class="residence-card-link" onclick="selectProperty('Aurelia Manor')">
+              Request Showing <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Residence 3 -->
+        <div class="residence-card reveal">
+          <div class="residence-img-container">
+            <img src="images/zephyr_heights.png" alt="Zephyr Heights" class="residence-img" />
+            <div class="residence-price-badge">$31,200,000</div>
+          </div>
+          <div class="residence-details">
+            <div class="residence-loc">Beverly Hills, California</div>
+            <h3 class="residence-name">Zephyr Heights</h3>
+            <div class="residence-specs">
+              <div class="spec-item">Beds<span>5</span></div>
+              <div class="spec-item">Baths<span>7</span></div>
+              <div class="spec-item">Area<span>14,000 SF</span></div>
+            </div>
+            <a href="#enquire" class="residence-card-link" onclick="selectProperty('Zephyr Heights')">
+              Request Showing <span>→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE VIRTUAL TOUR -->
+  <section id="tour" class="tour-section">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Walk the House</h2>
+        <p class="section-subtitle">A Curated Sensory Tour</p>
+      </div>
+
+      <div class="tour-container">
+        <!-- Interactive Menu -->
+        <div class="tour-menu reveal">
+          <div class="tour-menu-item active" data-room="foyer" onclick="switchTour('foyer')">
+            <span class="tour-num">01</span>
+            <span class="tour-title">Grand Foyer</span>
+          </div>
+          <div class="tour-menu-item" data-room="terrace" onclick="switchTour('terrace')">
+            <span class="tour-num">02</span>
+            <span class="tour-title">Ocean Terrace</span>
+          </div>
+          <div class="tour-menu-item" data-room="pavilion" onclick="switchTour('pavilion')">
+            <span class="tour-num">03</span>
+            <span class="tour-title">Infinity Pavilion</span>
+          </div>
+          <div class="tour-menu-item" data-room="suite" onclick="switchTour('suite')">
+            <span class="tour-num">04</span>
+            <span class="tour-title">Master Suite</span>
+          </div>
+        </div>
+
+        <!-- Frame Display -->
+        <div class="tour-display reveal">
+          <div class="tour-frame">
+            <img src="images/tour_foyer.png" id="img-foyer" class="tour-img active" alt="Grand Foyer Tour View" />
+            <img src="images/tour_terrace.png" id="img-terrace" class="tour-img" alt="Ocean Terrace Tour View" />
+            <img src="images/tour_pavilion.png" id="img-pavilion" class="tour-img" alt="Infinity Pavilion Tour View" />
+            <img src="images/tour_suite.png" id="img-suite" class="tour-img" alt="Master Suite Tour View" />
+          </div>
+          
+          <div class="tour-caption">
+            <h4 class="tour-caption-title active" id="caption-title">The Grand Foyer</h4>
+            <p class="tour-caption-desc active" id="caption-desc">
+              Step into an entrance of dramatic proportions. A double-height ceiling soars above custom-honed travertine marble floors, framed by floating solid-oak and brass stairways that capture indirect natural morning light.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS: CITIES AT DUSK -->
+  <section class="locations-section">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Select Locations</h2>
+        <p class="section-subtitle">Where Atmosphere Meets Address</p>
+      </div>
+
+      <div class="cities-grid">
+        
+        <!-- Malibu -->
+        <div class="city-card reveal">
+          <div class="city-bg" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(7, 7, 7, 0.9)), url('images/obsidian_villa.png');"></div>
+          <div class="city-overlay">
+            <h3 class="city-name">Malibu</h3>
+            <p class="city-desc">A coastal sanctuary defined by shifting ocean horizons, jagged cliffs, and private beach frontage. Home to our premier glass-and-stone waterfront collections.</p>
+          </div>
+        </div>
+
+        <!-- Aspen -->
+        <div class="city-card reveal">
+          <div class="city-bg" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(7, 7, 7, 0.9)), url('images/aurelia_manor.png');"></div>
+          <div class="city-overlay">
+            <h3 class="city-name">Aspen</h3>
+            <p class="city-desc">An alpine sanctuary set against towering mountain ranges. Luxury chalets featuring cathedral ceilings, native cedar, and geothermal snowmelt terraces.</p>
+          </div>
+        </div>
+
+        <!-- Beverly Hills -->
+        <div class="city-card reveal">
+          <div class="city-bg" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(7, 7, 7, 0.9)), url('images/zephyr_heights.png');"></div>
+          <div class="city-overlay">
+            <h3 class="city-name">Beverly Hills</h3>
+            <p class="city-desc">The crown jewel of cityscapes. Ultra-private gated crests offering uninterrupted panoramic views, zero-edge pool systems, and absolute security.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT ACCOLADES -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Connoisseur Feedback</h2>
+        <p class="section-subtitle">Exemplary Experiences</p>
+      </div>
+
+      <div class="testimonials-grid">
+        
+        <div class="testimonial-card reveal">
+          <div class="quote-icon">“</div>
+          <p class="testimonial-text">
+            "Acquiring Obsidian was an investment in a living canvas. The play of late afternoon light across the textured concrete slabs creates a sense of serenity that cannot be quantified."
+          </p>
+          <div class="client-info">
+            <div class="client-avatar">H.R</div>
+            <div>
+              <h5 class="client-name">Helena Rostova</h5>
+              <div class="client-title">Sotheby's Collector Club</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="quote-icon">“</div>
+          <p class="testimonial-text">
+            "We spent a year looking for an Aspen estate that did not feel like a typical log cabin. Aurelia Manor is a masterwork of steel, light and spatial geometry. Phenomenal craftsmanship."
+          </p>
+          <div class="client-info">
+            <div class="client-avatar">M.K</div>
+            <div>
+              <h5 class="client-name">Marcus Vance</h5>
+              <div class="client-title">Founder, Vance Capital Group</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <div class="quote-icon">“</div>
+          <p class="testimonial-text">
+            "The engineering of Zephyr Heights' cantilevered pool is a marvel. The seamless integration of interior space and the skyline makes it the ultimate sanctuary in Los Angeles."
+          </p>
+          <div class="client-info">
+            <div class="client-avatar">A.D</div>
+            <div>
+              <h5 class="client-name">Dr. Aris Thorne</h5>
+              <div class="client-title">Venture Partner & Collector</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY SECTION -->
+  <section id="enquire" class="enquiry-section">
+    <div class="container">
+      <div class="reveal">
+        <h2 class="section-title">Request Private Showing</h2>
+        <p class="section-subtitle">Begin Your Journey</p>
+      </div>
+
+      <div class="enquiry-container reveal">
+        <!-- Success State -->
+        <div class="success-overlay" id="successState">
+          <div class="success-icon">✓</div>
+          <h3 class="success-title">Liaison Notified</h3>
+          <p class="success-desc">
+            Your inquiry has been routed to our private wealth division. A dedicated portfolio manager will contact you within 4 hours to arrange details.
+          </p>
+        </div>
+
+        <!-- Form State -->
+        <form id="enquiryForm" onsubmit="handleEnquiry(event)">
+          <div class="form-grid">
+            
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" id="name" required class="form-control" placeholder="E.g. Lord Sterling" />
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Private Email Address</label>
+              <input type="email" id="email" required class="form-control" placeholder="sterling@address.com" />
+            </div>
+
+            <div class="form-group">
+              <label for="property" class="form-label">Estate of Interest</label>
+              <select id="property" class="form-control">
+                <option value="General Enquiry">General Portfolio Enquiry</option>
+                <option value="Obsidian Villa">The Obsidian Villa ($18.5M)</option>
+                <option value="Aurelia Manor">Aurelia Manor ($24.0M)</option>
+                <option value="Zephyr Heights">Zephyr Heights ($31.2M)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="schedule" class="form-label">Proposed Viewing Window</label>
+              <input type="date" id="schedule" required class="form-control" />
+            </div>
+
+            <div class="form-group form-full">
+              <label for="message" class="form-label">Special Accommodations / Requests</label>
+              <textarea id="message" class="form-control" placeholder="Specify airport transfer or private yacht boarding requirements..."></textarea>
+            </div>
+
+            <div class="form-submit-container">
+              <button type="submit" class="btn btn-gold">Initiate Inquiry</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-brand">
+          <div class="footer-logo">
+            MERIDIAN<span>.</span>
+          </div>
+          <p class="footer-desc">
+            A boutique luxury advisory and architectural curation firm. Representing singular residential masterworks across the globe.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Portfolio</h4>
+          <ul class="footer-links">
+            <li><a href="#residences">Obsidian Villa</a></li>
+            <li><a href="#residences">Aurelia Manor</a></li>
+            <li><a href="#residences">Zephyr Heights</a></li>
+            <li><a href="#tour">Virtual Showings</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Offices</h4>
+          <div class="footer-links" style="gap: 1.5rem;">
+            <div class="footer-contact-item">
+              <span>Malibu Coast</span>
+              23400 Pacific Coast Hwy,<br>Malibu, CA 90265
+            </div>
+            <div class="footer-contact-item">
+              <span>Zurich Heights</span>
+              Bahnhofstrasse 12,<br>8001 Zürich, CH
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <div class="footer-links" style="gap: 1.5rem;">
+            <div class="footer-contact-item">
+              <span>Private Liaison Desk</span>
+              liaison@meridianestates.co
+            </div>
+            <div class="footer-contact-item">
+              <span>Main Reception</span>
+              +1 (310) 555-0199
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 Meridian Estates. All architectural designs belong to their respective creators.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Agreement</a>
+          <a href="#">Non-Disclosure Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT FOR INTERACTION & PERFORMANCE -->
+  <script>
+    // Header Scroll State
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile Navigation Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Select property helper for card clicks
+    function selectProperty(propName) {
+      const selectElem = document.getElementById('property');
+      selectElem.value = propName;
+    }
+
+    // Interactive Virtual Tour switch logic
+    const tourCaptions = {
+      foyer: {
+        title: "The Grand Foyer",
+        desc: "Step into an entrance of dramatic proportions. A double-height ceiling soars above custom-honed travertine marble floors, framed by floating solid-oak and brass stairways that capture indirect natural morning light."
+      },
+      terrace: {
+        title: "Ocean Terrace",
+        desc: "Experience zero-boundary living. The lounge decks seamlessly give way to an absolute-overflow infinity swimming pool, framing panoramic views of the coastal cliffs and the crashing Pacific surf."
+      },
+      pavilion: {
+        title: "Infinity Pavilion",
+        desc: "An isolated sanctuary designed for quiet reflection or evening entertainment. Framed in structural glass, the pavilion hovers over the tree canopy, capturing cooling valley breezes and golden sunsets."
+      },
+      suite: {
+        title: "The Master Suite",
+        desc: "Your private retreat. Floor-to-ceiling retractable glass doors frame dramatic cityscapes or wilderness ranges, equipped with solid stone fireplaces, custom walk-in wardrobes, and an open freestanding soaking tub."
+      }
+    };
+
+    function switchTour(roomKey) {
+      // Toggle Active Menu Item
+      document.querySelectorAll('.tour-menu-item').forEach(item => {
+        if (item.getAttribute('data-room') === roomKey) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      // Swap Images with crossfade
+      document.querySelectorAll('.tour-img').forEach(img => {
+        if (img.id === `img-${roomKey}`) {
+          img.classList.add('active');
+        } else {
+          img.classList.remove('active');
+        }
+      });
+
+      // Update Text details with slide-up transitions
+      const captionTitle = document.getElementById('caption-title');
+      const captionDesc = document.getElementById('caption-desc');
+
+      // Briefly hide to trigger re-appear transition
+      captionTitle.classList.remove('active');
+      captionDesc.classList.remove('active');
+
+      setTimeout(() => {
+        captionTitle.textContent = tourCaptions[roomKey].title;
+        captionDesc.textContent = tourCaptions[roomKey].desc;
+        
+        captionTitle.classList.add('active');
+        captionDesc.classList.add('active');
+      }, 300);
+    }
+
+    // enquiry submit handler
+    function handleEnquiry(event) {
+      event.preventDefault();
+      
+      const form = document.getElementById('enquiryForm');
+      const successOverlay = document.getElementById('successState');
+
+      // Simulate network transition and success state
+      form.style.opacity = '0.3';
+      form.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        form.style.display = 'none';
+        successOverlay.style.display = 'flex';
+      }, 1000);
+    }
+
+    // IntersectionObserver scroll reveal setup (performance-optimized)
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          // Once animated, no need to track it further
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Bind observer
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+  </script>
+</body>
+</html>
