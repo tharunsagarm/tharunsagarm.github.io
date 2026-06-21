@@ -334,13 +334,16 @@ document.addEventListener('DOMContentLoaded', () => {
       workCards.forEach(card => {
         const cat = card.getAttribute('data-category');
         if (filter === 'all' || cat === filter) {
-          card.style.opacity = '1';
-          card.style.transform = 'scale(1)';
+          // Bug fix: using opacity:0.2 left cards in the grid flow creating gaps.
+          // Using display:'' restores the card and grid-auto-flow:dense fills gaps.
+          card.style.display = '';
           card.style.pointerEvents = 'auto';
+          setTimeout(() => { card.style.opacity = '1'; card.style.transform = ''; }, 10);
         } else {
-          card.style.opacity = '0.2';
-          card.style.transform = 'scale(0.95)';
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.9)';
           card.style.pointerEvents = 'none';
+          setTimeout(() => { card.style.display = 'none'; }, 350);
         }
       });
     });
