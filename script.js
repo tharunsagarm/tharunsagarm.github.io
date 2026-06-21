@@ -205,10 +205,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof THREE !== 'undefined') {
     initHeroCanvas();
   } else {
+    let attempts = 0;
     const checkThree = setInterval(() => {
+      attempts++;
       if (typeof THREE !== 'undefined') {
         clearInterval(checkThree);
         initHeroCanvas();
+      } else if (attempts > 100) {
+        clearInterval(checkThree);
+        console.warn('Three.js failed to load. Falling back to CSS background gradients.');
       }
     }, 100);
   }

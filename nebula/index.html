@@ -809,13 +809,15 @@
 
     // Counter animation
     function animateCount(el, target, suffix = '') {
+      const targetStr = el.dataset.target || '';
+      const decimals = targetStr.includes('.') ? targetStr.split('.')[1].length : 0;
       let start = 0;
       const duration = 1800;
       const step = timestamp => {
         if (!start) start = timestamp;
         const progress = Math.min((timestamp - start) / duration, 1);
         const ease = 1 - Math.pow(1 - progress, 3);
-        el.textContent = (target * ease).toFixed(target < 10 ? 2 : 0) + suffix;
+        el.textContent = (target * ease).toFixed(decimals) + suffix;
         if (progress < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
