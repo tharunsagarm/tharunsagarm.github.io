@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tharun Sagar — Social Media Showcase</title>
+  <meta name="description" content="Explore scroll-stopping posters, templates, and social media graphics designed by Tharun Sagar." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --bg-2: #F8F6F9;
+      --text: #1A1A1A;
+      --text-muted: #666666;
+      --border: rgba(0, 0, 0, 0.08);
+      --red: #DC143C;
+      --red-light: #FF2D55;
+      --red-glow: rgba(220, 20, 60, 0.1);
+      --radius: 16px;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      --font-main: 'Outfit', sans-serif;
+      --font-alt: 'Space Grotesk', sans-serif;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-2);
+      color: var(--text);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--red);
+    }
+
+    /* HEADER */
+    header {
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-icon {
+      font-size: 24px;
+      color: var(--red);
+    }
+
+    .brand-title {
+      font-family: var(--font-alt);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 100px;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .back-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+      transform: translateX(-4px);
+      box-shadow: 0 8px 20px rgba(220, 20, 60, 0.2);
+    }
+
+    /* GRID CONTAINER */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red-glow);
+      border: 1px solid rgba(220, 20, 60, 0.2);
+      padding: 6px 16px;
+      border-radius: 100px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .hero-title {
+      font-family: var(--font-alt);
+      font-size: clamp(32px, 5vw, 46px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 16px;
+    }
+
+    /* SHOWCASE GRID layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 968px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* INSTAGRAM FEED BOX */
+    .phone-mockup {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .feed-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .feed-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      padding: 2px;
+    }
+
+    .feed-avatar-inner {
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--red);
+      font-size: 14px;
+    }
+
+    .feed-username {
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .feed-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* INSTAGRAM 3X3 GRID */
+    .feed-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--bg-2);
+      padding: 2px;
+    }
+
+    .feed-item {
+      aspect-ratio: 1;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .feed-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: white;
+      opacity: 0;
+      transition: var(--transition);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .feed-item:hover .feed-item-overlay {
+      opacity: 1;
+    }
+
+    /* RIGHT COLUMN: BRAND & STRATEGY */
+    .details-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-family: var(--font-alt);
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+
+    .card-title i {
+      color: var(--red);
+    }
+
+    /* POST DESCRIPTION DIALOG */
+    .details-box {
+      background: var(--bg-2);
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 4px solid var(--red);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .details-box h4 {
+      font-family: var(--font-alt);
+      font-size: 16px;
+    }
+
+    .details-stats {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .details-stats span i {
+      color: var(--red);
+      margin-right: 4px;
+    }
+
+    /* BRAND KIT CARD */
+    .palette-grid {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .color-swatch {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .color-swatch:hover {
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    .color-swatch span {
+      position: absolute;
+      bottom: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* CALENDAR PILLARS */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 580px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pillar-card {
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+    }
+
+    .pillar-num {
+      font-size: 11px;
+      color: var(--red);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .pillar-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .pillar-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="../index.html" class="brand">
+      <div class="brand-icon"><i class="fa-solid fa-compass"></i></div>
+      <div class="brand-title">Tharun Sagar</div>
+    </a>
+    <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+  </header>
+
+  <div class="container">
+    
+    <!-- HERO -->
+    <section class="hero-section">
+      <div class="hero-badge">Social Media & Branding</div>
+      <h1 class="hero-title">Visual Designs & Campaigns</h1>
+      <p class="hero-desc">Interactive branding kits, scroll-stopping graphic designs, and structured content pillars.</p>
+    </section>
+
+    <!-- CONTENT SHOWCASE -->
+    <section class="main-grid">
+      
+      <!-- LEFT COLUMN: INSTAGRAM FEED MOCK -->
+      <div>
+        <div class="phone-mockup">
+          <div class="feed-header">
+            <div class="feed-avatar">
+              <div class="feed-avatar-inner">TS</div>
+            </div>
+            <div>
+              <div class="feed-username">tharunsagar.design</div>
+              <div class="feed-subtitle">Original Designs & Posters</div>
+            </div>
+          </div>
+
+          <div class="feed-grid" id="feedGrid">
+            <!-- 3x3 Grid loaded dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: INTERACTIVE SPECS -->
+      <div class="details-column">
+        
+        <!-- Live Selected Post Panel -->
+        <div class="card">
+          <div class="card-title"><i class="fa-solid fa-circle-info"></i> Design Strategy Breakdown</div>
+          <div class="details-box" id="detailsBox">
+            <h4 id="boxTitle">Select a design from the Instagram grid to dissect its strategy.</h4>
+            <p id="boxDesc" style="color: var(--text-muted); font-size: 14px;">Each graphic has been engineered to stop the scroll, incorporating grid alignments, visual weight rules, and conversion typography.</p>
+            <div class="details-stats" id="boxStats" style="display:none;">
+              <span><i class="fa-solid fa-heart"></i> <span id="statLikes">0</span> Likes</span>
+              <span><i class="fa-solid fa-comment"></i> <span id="statComments">0</span> Comments</span>
+              <span><i class="fa-solid fa-chart-line"></i> <span id="statEr">0%</span> ER</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand Identity Spec Panel -->
+        <div class="card">
+          <div class="card-title"><i class="fa-solid fa-palette"></i> Brand Identity Spec Board</div>
+          <p class="hero-desc" style="font-size: 14px; text-align: left; margin: 0 0 12px 0;">Our signature color matrix engineered for modern software and tech platforms. Click to copy hex colors.</p>
+          
+          <div class="palette-grid">
+            <div class="color-swatch" style="background: #DC143C;" onclick="navigator.clipboard.writeText('#DC143C'); alert('Copied Hex #DC143C!')"><span>#DC143C</span></div>
+            <div class="color-swatch" style="background: #1A1A1A;" onclick="navigator.clipboard.writeText('#1A1A1A'); alert('Copied Hex #1A1A1A!')"><span>#1A1A1A</span></div>
+            <div class="color-swatch" style="background: #FFFFFF;" onclick="navigator.clipboard.writeText('#FFFFFF'); alert('Copied Hex #FFFFFF!')"><span>#FFFFFF</span></div>
+            <div class="color-swatch" style="background: #F3F4F6;" onclick="navigator.clipboard.writeText('#F3F4F6'); alert('Copied Hex #F3F4F6!')"><span>#F3F4F6</span></div>
+          </div>
+        </div>
+
+        <!-- Strategy Pillars Panel -->
+        <div class="card">
+          <div class="card-title"><i class="fa-solid fa-calendar-days"></i> Content Strategy & Pillars</div>
+          <p class="hero-desc" style="font-size: 14px; text-align: left; margin: 0;">We build campaigns around four core content pillars to grow organic reach systematically.</p>
+          
+          <div class="pillars-grid">
+            <div class="pillar-card">
+              <div class="pillar-num">Pillar 01</div>
+              <div class="pillar-title">Authority Building</div>
+              <div class="pillar-desc">Infographics and technical breakdowns that showcase industry knowledge.</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-num">Pillar 02</div>
+              <div class="pillar-title">Social Proof</div>
+              <div class="pillar-desc">Case studies, testimonials, and customer victory cards.</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-num">Pillar 03</div>
+              <div class="pillar-title">Community Value</div>
+              <div class="pillar-desc">Actionable checklists, carousel tips, and templates.</div>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-num">Pillar 04</div>
+              <div class="pillar-title">Direct Conversion</div>
+              <div class="pillar-desc">Product spotlight cards and limited-time offer designs.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <script>
+    // DYNAMIC POST DATA
+    const posts = [
+      {
+        title: "SaaS Launch Announcement",
+        desc: "Bold typography contrasting high-contrast red accents against clean dark grey. Engineered to grab developers' attention immediately. Visual utilizes code-bracket shapes to highlight SaaS features.",
+        likes: 1248,
+        comments: 48,
+        er: "8.2%",
+        img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "Growth Case Study Slide",
+        desc: "Visual representation of data scaling curves. Leveraged clean lines, custom red-to-dark gradient graphs, and Outlined values. Strategy focus: digestible metrics that build authority.",
+        likes: 852,
+        comments: 29,
+        er: "5.8%",
+        img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "Developer Tip Card",
+        desc: "A syntax-highlighted carbon mock frame displaying tip text. Features cherry red accents to call out lines that optimize performance. Ideal for carousels.",
+        likes: 1420,
+        comments: 92,
+        er: "9.6%",
+        img: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "Brand Logo Guidelines",
+        desc: "Clean geometric alignments of vectors. Showcases brand mark scaling configurations, margin margins, and clean spacing guidelines. High-end minimal look.",
+        likes: 624,
+        comments: 15,
+        er: "4.2%",
+        img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "AI Integration Workflow",
+        desc: "Drag-and-drop workflow visual map. Uses clean icons and connections matching the AutoFlow theme. Strategy focus: simplification of complex automated operations.",
+        likes: 994,
+        comments: 34,
+        er: "6.7%",
+        img: "https://images.unsplash.com/photo-1618005198143-d3668a3f8538?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "UX Checklist Poster",
+        desc: "A neat grid lists checklist items. High-contrast typography and red checkmarks. High save-rate graphic designed to generate shares and bookmarks.",
+        likes: 1890,
+        comments: 110,
+        er: "11.2%",
+        img: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "OMAKASE Courses Post",
+        desc: "Minimalist sushi photography overlayed with custom serif descriptions. Colors lean towards deep blacks and delicate amber accents. Targets high-end foodies.",
+        likes: 712,
+        comments: 24,
+        er: "5.1%",
+        img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "Minimal Typography Quote",
+        desc: "Large Outlined sans-serif quote text on pure white backing. Focuses on the core message, letting blank spaces create structural aesthetic breathing room.",
+        likes: 540,
+        comments: 12,
+        er: "3.8%",
+        img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=300&auto=format&fit=crop"
+      },
+      {
+        title: "Client Testimonial Card",
+        desc: "Premium card showcasing positive text from founders. Framed with rounded borders, a delicate red quotes label, and founder credentials. Builds instant trust.",
+        likes: 914,
+        comments: 22,
+        er: "6.2%",
+        img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=300&auto=format&fit=crop"
+      }
+    ];
+
+    const feedGrid = document.getElementById('feedGrid');
+    const detailsBox = document.getElementById('detailsBox');
+    const boxTitle = document.getElementById('boxTitle');
+    const boxDesc = document.getElementById('boxDesc');
+    const boxStats = document.getElementById('boxStats');
+    const statLikes = document.getElementById('statLikes');
+    const statComments = document.getElementById('statComments');
+    const statEr = document.getElementById('statEr');
+
+    // INITIALIZE GRID
+    function initGrid() {
+      feedGrid.innerHTML = '';
+      posts.forEach((post, idx) => {
+        const item = document.createElement('div');
+        item.className = 'feed-item';
+        item.style.backgroundImage = `url('${post.img}')`;
+        item.innerHTML = `
+          <div class="feed-item-overlay">
+            <span><i class="fa-solid fa-heart"></i> ${post.likes}</span>
+            <span><i class="fa-solid fa-comment"></i> ${post.comments}</span>
+          </div>
+        `;
+        item.addEventListener('click', () => showDetails(idx));
+        feedGrid.appendChild(item);
+      });
+    }
+
+    // SHOW DETAILS
+    function showDetails(idx) {
+      const post = posts[idx];
+      boxTitle.textContent = post.title;
+      boxDesc.textContent = post.desc;
+      statLikes.textContent = post.likes;
+      statComments.textContent = post.comments;
+      statEr.textContent = post.er;
+      boxStats.style.display = 'flex';
+      
+      // Scroll details box into view slightly on mobile
+      if (window.innerWidth <= 968) {
+        detailsBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    initGrid();
+  </script>
+</body>
+</html>
