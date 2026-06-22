@@ -34,6 +34,7 @@
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="#services" class="nav-link">Services</a></li>
       <li><a href="#work" class="nav-link">Work</a></li>
+      <li><a href="#pricing" class="nav-link">Pricing</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-cta" id="navCta">Let's Talk</a>
@@ -167,6 +168,67 @@
     </div>
   </section>
 
+  <!-- VIDEO INTRO SECTION -->
+  <section class="video-intro-section" id="video-intro">
+    <div class="container">
+      <div class="video-intro-inner">
+        <div class="video-intro-text">
+          <div class="section-label">Meet Tharun</div>
+          <h2 class="section-title">Hi, I'm <span class="text-red">Tharun Sagar</span> 👋</h2>
+          <p class="video-intro-desc">I help businesses build stunning websites, automate workflows with AI, and create high-converting UGC ads — all from one place. Watch my 60-second intro to see how I work.</p>
+          <ul class="video-intro-points">
+            <li>✅ 3+ years building for global clients</li>
+            <li>✅ Fast delivery — most projects in 7 days</li>
+            <li>✅ Transparent pricing, zero hidden fees</li>
+            <li>✅ 24/7 communication, regular updates</li>
+          </ul>
+          <button onclick="openVideoModal()" class="btn btn-primary" id="watchIntroBtn" style="margin-top:24px;">▶ Watch My Intro</button>
+        </div>
+        <div class="video-intro-card" onclick="openVideoModal()" id="videoCard">
+          <div class="video-thumbnail">
+            <div class="video-overlay-gradient"></div>
+            <div class="video-emoji-bg">🎬</div>
+            <div class="video-play-btn" id="playBtn">
+              <div class="play-icon">▶</div>
+            </div>
+            <div class="video-duration">1:00</div>
+            <div class="video-label">Intro Video</div>
+          </div>
+          <div class="video-card-footer">
+            <div class="vcf-avatar">TS</div>
+            <div>
+              <div class="vcf-name">Tharun Sagar</div>
+              <div class="vcf-role">Web Dev · AI · UGC · Social Media</div>
+            </div>
+            <div class="vcf-views">👁 Watch Now</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO MODAL -->
+  <div class="video-modal-overlay" id="videoOverlay" onclick="closeVideoModal()"></div>
+  <div class="video-modal" id="videoModal">
+    <button class="video-modal-close" onclick="closeVideoModal()" id="videoCloseBtn">×</button>
+    <div class="video-modal-inner">
+      <div class="video-embed-wrap" id="videoEmbed">
+        <!-- Placeholder — replace src with your Loom/YouTube link -->
+        <div class="video-placeholder-msg">
+          <div style="font-size:60px;margin-bottom:16px;">🎥</div>
+          <h3>Your Intro Video Goes Here!</h3>
+          <p>Record a 60-second video on <strong>Loom</strong> (free) introducing yourself.</p>
+          <p style="margin-top:12px;">Then share the link with me and I'll embed it here in 2 minutes!</p>
+          <div class="video-steps">
+            <div class="vstep">1️⃣ Go to <strong>loom.com</strong> → Record yourself</div>
+            <div class="vstep">2️⃣ Copy the Loom link</div>
+            <div class="vstep">3️⃣ Send me the link → I'll add it!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SERVICES SECTION -->
   <section class="services" id="services">
     <div class="container">
@@ -248,6 +310,89 @@
     </div>
   </section>
 
+  <!-- TECH STACK SECTION -->
+  <section class="techstack" id="techstack">
+    <div class="container">
+      <div class="section-label">Tools & Technologies</div>
+      <h2 class="section-title text-center">My <span class="text-red">Tech Stack</span></h2>
+      <p class="section-desc text-center">Battle-tested technologies I use to deliver fast, scalable, and modern solutions.</p>
+      <div class="tech-grid">
+        <div class="tech-item" id="tech-html"><div class="tech-icon">🌐</div><div class="tech-name">HTML5</div></div>
+        <div class="tech-item" id="tech-css"><div class="tech-icon">🎨</div><div class="tech-name">CSS3</div></div>
+        <div class="tech-item" id="tech-js"><div class="tech-icon">⚡</div><div class="tech-name">JavaScript</div></div>
+        <div class="tech-item" id="tech-react"><div class="tech-icon">⚛️</div><div class="tech-name">React</div></div>
+        <div class="tech-item" id="tech-node"><div class="tech-icon">🟢</div><div class="tech-name">Node.js</div></div>
+        <div class="tech-item" id="tech-python"><div class="tech-icon">🐍</div><div class="tech-name">Python</div></div>
+        <div class="tech-item" id="tech-ai"><div class="tech-icon">🤖</div><div class="tech-name">OpenAI API</div></div>
+        <div class="tech-item" id="tech-n8n"><div class="tech-icon">🔗</div><div class="tech-name">n8n / Zapier</div></div>
+        <div class="tech-item" id="tech-figma"><div class="tech-icon">🖌️</div><div class="tech-name">Figma</div></div>
+        <div class="tech-item" id="tech-wordpress"><div class="tech-icon">📝</div><div class="tech-name">WordPress</div></div>
+        <div class="tech-item" id="tech-firebase"><div class="tech-icon">🔥</div><div class="tech-name">Firebase</div></div>
+        <div class="tech-item" id="tech-git"><div class="tech-icon">🐙</div><div class="tech-name">Git / GitHub</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-label">Transparent Pricing</div>
+      <h2 class="section-title text-center">Simple, <span class="text-red">Honest Pricing</span></h2>
+      <p class="section-desc text-center">No hidden fees. No surprises. Pick a package or get a custom quote.</p>
+      <div class="pricing-grid">
+
+        <div class="pricing-card" id="price-starter">
+          <div class="pricing-label">Starter</div>
+          <div class="pricing-price">$299<span class="price-period">/project</span></div>
+          <p class="pricing-desc">Perfect for landing pages & simple websites</p>
+          <ul class="pricing-list">
+            <li>✅ 1–5 Page Website</li>
+            <li>✅ Mobile Responsive</li>
+            <li>✅ Contact Form</li>
+            <li>✅ 3 Revisions</li>
+            <li>✅ 5 Day Delivery</li>
+            <li>✅ Basic SEO Setup</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline btn-full" id="price-starter-btn">Get Started</a>
+        </div>
+
+        <div class="pricing-card pricing-featured" id="price-pro">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-label">Professional</div>
+          <div class="pricing-price">$599<span class="price-period">/project</span></div>
+          <p class="pricing-desc">Full web app or AI automation solution</p>
+          <ul class="pricing-list">
+            <li>✅ Full-Stack Web App</li>
+            <li>✅ AI Integration / Automation</li>
+            <li>✅ Custom Dashboard</li>
+            <li>✅ Unlimited Revisions</li>
+            <li>✅ 10 Day Delivery</li>
+            <li>✅ SEO + Performance Optimized</li>
+            <li>✅ 30 Days Support</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary btn-full" id="price-pro-btn">Get Started</a>
+        </div>
+
+        <div class="pricing-card" id="price-retainer">
+          <div class="pricing-label">Monthly Retainer</div>
+          <div class="pricing-price">$499<span class="price-period">/month</span></div>
+          <p class="pricing-desc">Ongoing work — best value for startups</p>
+          <ul class="pricing-list">
+            <li>✅ 40 Hours of Work/Month</li>
+            <li>✅ Priority Response</li>
+            <li>✅ Web Dev + AI + Design</li>
+            <li>✅ Weekly Progress Reports</li>
+            <li>✅ Cancel Anytime</li>
+            <li>✅ Dedicated Support</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline btn-full" id="price-retainer-btn">Get Started</a>
+        </div>
+
+      </div>
+      <p style="text-align:center;margin-top:32px;color:var(--gray);font-size:14px;">💬 Need something custom? <a href="#contact" style="color:var(--red);font-weight:600;">Let's talk</a> — I offer custom quotes for unique projects.</p>
+    </div>
+  </section>
+
   <!-- WORK / PORTFOLIO SECTION -->
   <section class="work" id="work">
     <div class="container">
@@ -279,7 +424,7 @@
                 <span class="work-tag">Web Development</span>
                 <h4>E-Commerce Platform</h4>
                 <p>Full-stack shopping experience with 3x conversions</p>
-                <a href="#contact" class="work-link">View Project →</a>
+                <a href="ecommerce/index.html" target="_blank" class="work-link">View Live Site →</a>
               </div>
             </div>
           </div>
@@ -378,15 +523,15 @@
             <div class="work-overlay">
               <div class="work-overlay-content">
                 <span class="work-tag">Web Development</span>
-                <h4>SaaS Dashboard</h4>
-                <p>Real-time analytics platform with 99.9% uptime</p>
-                <a href="#contact" class="work-link">View Project →</a>
+                <h4>Apex Studio — Startup Agency</h4>
+                <p>Fully animated startup agency site with particles, counters & working contact</p>
+                <a href="agency/index.html" target="_blank" class="work-link">View Live Site →</a>
               </div>
             </div>
           </div>
           <div class="work-info">
             <span class="work-category">Web Dev</span>
-            <h3>SaaS Analytics Dashboard</h3>
+            <h3>Apex — Startup Agency Site</h3>
           </div>
         </div>
 
@@ -414,23 +559,6 @@
           </div>
         </div>
 
-        <div class="work-card large" data-category="web" id="work-7">
-          <div class="work-card-img">
-            <img src="nebula-preview.png" alt="Nebula SaaS Platform" style="width:100%;height:100%;object-fit:cover;display:block;" />
-            <div class="work-overlay">
-              <div class="work-overlay-content">
-                <span class="work-tag">Web Development</span>
-                <h4>Nebula SaaS Platform</h4>
-                <p>Premium AI-powered SaaS landing page with stunning dark UI</p>
-                <a href="nebula/index.html" target="_blank" class="work-link">View Live Site →</a>
-              </div>
-            </div>
-          </div>
-          <div class="work-info">
-            <span class="work-category">Web Dev</span>
-            <h3>Nebula SaaS Platform</h3>
-          </div>
-        </div>
 
         <div class="work-card" data-category="web" id="work-8">
           <div class="work-card-img">
@@ -540,34 +668,34 @@
       <div class="testimonials-grid">
         <div class="testimonial-card" id="test-1">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Tharun built our entire website from scratch in just 2 days. The design is stunning and our leads have doubled since launch. Absolute professional!"</p>
+          <p class="testimonial-text">"Tharun built our entire e-commerce website in 3 days. The design is stunning and our conversions doubled within the first week. Best freelancer I've ever hired!"</p>
           <div class="testimonial-author">
-            <div class="author-avatar">RK</div>
+            <div class="author-avatar">JM</div>
             <div>
-              <div class="author-name">Rahul Kapoor</div>
-              <div class="author-role">Founder, TechStartup</div>
+              <div class="author-name">James Mitchell</div>
+              <div class="author-role">Founder, ShopNova — 🇺🇸 USA</div>
             </div>
           </div>
         </div>
         <div class="testimonial-card featured-test" id="test-2">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"The AI automation system he built for us saves us 50+ hours every week. ROI was clear within the first month. Best investment we made this year!"</p>
+          <p class="testimonial-text">"The AI automation system he built saves us 50+ hours every week. ROI was clear within the first month. Tharun communicates fast and delivers better than promised!"</p>
           <div class="testimonial-author">
-            <div class="author-avatar">SM</div>
+            <div class="author-avatar">SO</div>
             <div>
-              <div class="author-name">Sneha Mehta</div>
-              <div class="author-role">CEO, E-Commerce Brand</div>
+              <div class="author-name">Sarah O'Brien</div>
+              <div class="author-role">CEO, GrowthLab — 🇬🇧 UK</div>
             </div>
           </div>
         </div>
         <div class="testimonial-card" id="test-3">
           <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"Our UGC ad campaign went viral — 2M+ views and 3x return on ad spend. Tharun knows exactly how to create content that converts. Highly recommend!"</p>
+          <p class="testimonial-text">"Our UGC ad campaign got 2M+ views and 3x ROAS. Tharun knows exactly how to create content that converts for international markets. Absolutely recommend!"</p>
           <div class="testimonial-author">
-            <div class="author-avatar">AJ</div>
+            <div class="author-avatar">LW</div>
             <div>
-              <div class="author-name">Arjun Joshi</div>
-              <div class="author-role">Marketing Director</div>
+              <div class="author-name">Liam Watson</div>
+              <div class="author-role">Marketing Director — 🇦🇺 Australia</div>
             </div>
           </div>
         </div>
@@ -622,9 +750,32 @@
             </div>
           </div>
           <div class="social-links">
-            <a href="#" class="social-link" id="social-instagram">Instagram</a>
-            <a href="#" class="social-link" id="social-linkedin">LinkedIn</a>
-            <a href="#" class="social-link" id="social-twitter">Twitter</a>
+            <a href="https://github.com/tharunsagar-m" target="_blank" class="social-link" id="social-github">GitHub</a>
+            <a href="https://linkedin.com/in/tharunsagarm" target="_blank" class="social-link" id="social-linkedin">LinkedIn</a>
+            <a href="https://twitter.com/tharunsagarm" target="_blank" class="social-link" id="social-twitter">Twitter</a>
+          </div>
+          <!-- PAYMENT BADGES -->
+          <div class="payment-badges" id="payment-badges">
+            <div class="payment-badges-label">💳 Accepted Payments</div>
+            <div class="payment-badges-row">
+              <div class="payment-badge" id="pay-paypal">
+                <span class="pay-icon">🅿️</span>
+                <div>
+                  <div class="pay-name">PayPal</div>
+                  <div class="pay-sub">tharunsagarm96@gmail.com</div>
+                </div>
+              </div>
+              <div class="payment-badge" id="pay-usdt">
+                <span class="pay-icon">🦊</span>
+                <div>
+                  <div class="pay-name">USDT (Crypto)</div>
+                  <div class="pay-sub">MetaMask · Polygon Network</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:24px;">
+            <button onclick="openBooking()" class="btn btn-primary" id="bookCallBtn" style="display:inline-flex;gap:8px;align-items:center;border:none;cursor:pointer;">📅 Book a Free Call</button>
           </div>
         </div>
         <div class="contact-form-wrap">
@@ -676,13 +827,102 @@
         <p class="footer-tagline">Building digital experiences that convert.</p>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Tharun Sagar. All rights reserved.</p>
-        <p>Designed & Built with ❤️ and ☕</p>
+        <p>&copy; 2026 Tharun Sagar. All rights reserved.</p>
+        <p>Designed &amp; Built with ❤️ and ☕ | Available Worldwide 🌍</p>
       </div>
     </div>
   </footer>
 
+  <!-- BOOKING MODAL -->
+  <div class="booking-overlay" id="bookingOverlay" onclick="closeBooking()">​</div>
+  <div class="booking-modal" id="bookingModal">
+    <button class="booking-close" onclick="closeBooking()" id="bookingCloseBtn">&times;</button>
+    <div class="booking-header">
+      <div class="booking-icon">📅</div>
+      <h3>Book a Free 15-Min Call</h3>
+      <p>Let's discuss your project. I'll get back to you within 2 hours!</p>
+    </div>
+    <form class="booking-form" id="bookingForm" onsubmit="submitBooking(event)">
+      <div class="booking-group">
+        <label>Your Name *</label>
+        <input type="text" id="bookName" placeholder="e.g. John Smith" required />
+      </div>
+      <div class="booking-group">
+        <label>Email Address *</label>
+        <input type="email" id="bookEmail" placeholder="john@company.com" required />
+      </div>
+      <div class="booking-group">
+        <label>Your Country</label>
+        <input type="text" id="bookCountry" placeholder="e.g. USA, UK, Australia" />
+      </div>
+      <div class="booking-group">
+        <label>Service You Need *</label>
+        <select id="bookService" required>
+          <option value="">Select a service...</option>
+          <option value="web">Web Development</option>
+          <option value="ai">AI Automation</option>
+          <option value="ugc">UGC Ads Creation</option>
+          <option value="social">Social Media Design</option>
+          <option value="combo">Multiple Services</option>
+        </select>
+      </div>
+      <div class="booking-group">
+        <label>Preferred Time (Your Timezone)</label>
+        <input type="text" id="bookTime" placeholder="e.g. Monday 3PM EST / Tuesday 10AM GMT" />
+      </div>
+      <div class="booking-group">
+        <label>Quick Project Description</label>
+        <textarea id="bookDesc" rows="3" placeholder="Tell me briefly what you need..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="bookSubmitBtn">
+        🚀 Confirm Booking Request
+      </button>
+      <div class="booking-success" id="bookingSuccess">
+        ✅ <strong>Request sent!</strong> I'll email you within 2 hours to confirm the call time.
+      </div>
+    </form>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    function openBooking() {
+      document.getElementById('bookingOverlay').classList.add('active');
+      document.getElementById('bookingModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeBooking() {
+      document.getElementById('bookingOverlay').classList.remove('active');
+      document.getElementById('bookingModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function submitBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('bookName').value;
+      const email = document.getElementById('bookEmail').value;
+      const country = document.getElementById('bookCountry').value;
+      const service = document.getElementById('bookService').value;
+      const time = document.getElementById('bookTime').value;
+      const desc = document.getElementById('bookDesc').value;
+      // Open email client with pre-filled details
+      const subject = encodeURIComponent(`Call Booking Request from ${name}`);
+      const body = encodeURIComponent(
+        `Hi Tharun,\n\nI'd like to book a free 15-min call.\n\nName: ${name}\nEmail: ${email}\nCountry: ${country}\nService: ${service}\nPreferred Time: ${time}\n\nProject: ${desc}\n\nLooking forward to speaking with you!`);
+      window.open(`mailto:tharunsagarm96@gmail.com?subject=${subject}&body=${body}`, '_blank');
+      document.getElementById('bookingSuccess').style.display = 'block';
+      document.getElementById('bookSubmitBtn').style.display = 'none';
+      setTimeout(closeBooking, 3000);
+    }
+    function openVideoModal() {
+      document.getElementById('videoOverlay').classList.add('active');
+      document.getElementById('videoModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeVideoModal() {
+      document.getElementById('videoOverlay').classList.remove('active');
+      document.getElementById('videoModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  </script>
 </body>
 </html>
