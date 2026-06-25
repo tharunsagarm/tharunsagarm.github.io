@@ -1204,6 +1204,43 @@ section { position: relative; overflow: hidden; }
 }
 .social-link:hover { border-color: var(--red); color: var(--red); }
 
+/* Payment Badges */
+.payment-badges {
+  margin-top: 28px;
+}
+.payment-badges-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 12px;
+}
+.payment-badges-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.payment-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-fast);
+}
+.payment-badge:hover {
+  border-color: var(--border-red);
+  transform: translateX(4px);
+}
+.pay-icon { font-size: 28px; flex-shrink: 0; }
+.pay-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.pay-sub  { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+
 /* Contact Form */
 .contact-form-wrap {
   background: var(--white);
