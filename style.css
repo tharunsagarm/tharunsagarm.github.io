@@ -1911,3 +1911,64 @@ section { position: relative; overflow: hidden; }
 #pay-paypal .pay-name {
   color: #003087;
 }
+
+/* ---- SOCIAL LINKS WITH ICONS ---- */
+.social-links {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  background: var(--bg-2);
+  color: var(--text);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link svg {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.social-link:hover svg {
+  transform: scale(1.15);
+}
+
+/* GitHub — dark hover */
+#social-github:hover {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* LinkedIn — LinkedIn blue hover */
+#social-linkedin:hover {
+  background: #0077B5;
+  border-color: #0077B5;
+  color: #ffffff;
+}
+
+/* X (Twitter) — X black hover */
+#social-twitter:hover {
+  background: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}

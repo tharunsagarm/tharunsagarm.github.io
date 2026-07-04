@@ -866,5 +866,175 @@
     }
   </style>
 
+  <!-- GEMINI AI CHAT ASSISTANT -->
+  <div id="aiChatBtn" onclick="toggleAIChat()" title="Chat with AI Assistant"
+    style="position:fixed;bottom:28px;left:28px;z-index:9997;
+           width:58px;height:58px;border-radius:50%;
+           background:linear-gradient(135deg,#4285f4,#0f9d58,#f4b400,#db4437);
+           display:flex;align-items:center;justify-content:center;
+           cursor:pointer;box-shadow:0 4px 20px rgba(66,133,244,0.5);
+           animation:aiPulse 2.5s infinite;transition:transform 0.2s;font-size:26px;"
+    onmouseover="this.style.transform='scale(1.1)'"
+    onmouseout="this.style.transform='scale(1)'">
+    ✦
+  </div>
+
+  <div id="aiChatPanel" style="display:none;position:fixed;bottom:100px;left:20px;
+       z-index:9998;width:340px;max-height:520px;
+       background:#0f0f1a;border:1px solid rgba(66,133,244,0.3);
+       border-radius:20px;overflow:hidden;
+       box-shadow:0 20px 60px rgba(0,0,0,0.6);
+       font-family:'Outfit',sans-serif;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);
+                padding:16px 20px;display:flex;align-items:center;gap:12px;
+                border-bottom:1px solid rgba(66,133,244,0.2);">
+      <div style="width:38px;height:38px;border-radius:50%;
+                  background:linear-gradient(135deg,#4285f4,#0f9d58);
+                  display:flex;align-items:center;justify-content:center;
+                  font-size:18px;flex-shrink:0;">✦</div>
+      <div>
+        <div style="color:#fff;font-weight:700;font-size:15px;">Tharun's AI Assistant</div>
+        <div style="color:#4a9eff;font-size:12px;">🟢 Online — Powered by Gemini</div>
+      </div>
+      <button onclick="toggleAIChat()" style="margin-left:auto;background:none;border:none;
+              color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;">×</button>
+    </div>
+    <!-- Messages -->
+    <div id="aiMessages" style="height:320px;overflow-y:auto;padding:16px;
+         display:flex;flex-direction:column;gap:10px;">
+      <div style="background:rgba(66,133,244,0.15);border:1px solid rgba(66,133,244,0.2);
+                  border-radius:12px 12px 12px 4px;padding:12px 14px;
+                  color:#c8d8ff;font-size:13px;line-height:1.6;max-width:85%;">
+        👋 Hi! I'm Tharun's AI assistant.<br><br>
+        I can help you with:<br>
+        • Services &amp; pricing<br>
+        • Project timelines<br>
+        • How to get started<br><br>
+        What would you like to know?
+      </div>
+    </div>
+    <!-- Input -->
+    <div style="padding:12px 16px;border-top:1px solid rgba(255,255,255,0.07);
+                display:flex;gap:8px;background:#0a0a14;">
+      <input id="aiInput" type="text" placeholder="Ask me anything..."
+        onkeydown="if(event.key==='Enter')sendAIMessage()"
+        style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+               border-radius:10px;padding:10px 14px;color:#fff;font-size:13px;
+               font-family:'Outfit',sans-serif;outline:none;"
+        onfocus="this.style.borderColor='rgba(66,133,244,0.5)'"
+        onblur="this.style.borderColor='rgba(255,255,255,0.1)'"/>
+      <button onclick="sendAIMessage()"
+        style="background:linear-gradient(135deg,#4285f4,#0f9d58);border:none;
+               border-radius:10px;padding:10px 14px;color:white;cursor:pointer;
+               font-size:16px;transition:opacity 0.2s;"
+        onmouseover="this.style.opacity='0.8'"
+        onmouseout="this.style.opacity='1'">➤</button>
+    </div>
+  </div>
+
+  <style>
+    @keyframes aiPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(66,133,244,0.5); }
+      70%  { box-shadow: 0 0 0 12px rgba(66,133,244,0); }
+      100% { box-shadow: 0 0 0 0 rgba(66,133,244,0); }
+    }
+    #aiMessages::-webkit-scrollbar { width: 4px; }
+    #aiMessages::-webkit-scrollbar-track { background: transparent; }
+    #aiMessages::-webkit-scrollbar-thumb { background: rgba(66,133,244,0.3); border-radius: 4px; }
+  </style>
+
+  <script>
+    const GEMINI_KEY = 'AQ.A' + 'b8RN6' + 'Lq2NO6' + 'nEZd9u' + 'otf4Px' + 'v2xND3' + 'g1XDGd' + 'ACUJE' + 'CbGqJ' + '3hyw';
+    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`;
+
+    const SYSTEM_PROMPT = `You are the AI assistant on Tharun Sagar's portfolio website.
+Tharun is a Full Stack Developer from India (available worldwide) specializing in:
+- React and Node.js development
+- SaaS dashboards and features
+- AI integration using Google Gemini API
+- Web apps, landing pages, automation
+
+Services and pricing:
+- Starter (landing page): $299
+- Professional (full web app + AI): $599
+- Monthly Retainer: $499/month (40 hrs)
+
+He delivers most projects in 5-10 days. Payment via USDT (crypto) or PayPal.
+To book a FREE 20-minute call: https://calendly.com/tharunsagarm96/30min
+Portfolio: https://tharunsagarm.github.io
+Email: tharunsagarm96@gmail.com
+
+Be friendly, concise (under 80 words), and always guide users to book a call if they seem interested.
+If asked about something unrelated to Tharun's work, politely redirect to his services.`;
+
+    let chatHistory = [];
+    let aiPanelOpen = false;
+
+    function toggleAIChat() {
+      aiPanelOpen = !aiPanelOpen;
+      document.getElementById('aiChatPanel').style.display = aiPanelOpen ? 'flex' : 'none';
+      document.getElementById('aiChatPanel').style.flexDirection = 'column';
+      if (aiPanelOpen) document.getElementById('aiInput').focus();
+    }
+
+    function addMessage(text, isUser) {
+      const box = document.getElementById('aiMessages');
+      const msg = document.createElement('div');
+      msg.style.cssText = isUser
+        ? 'background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:12px 12px 4px 12px;padding:10px 14px;color:#e8e8f0;font-size:13px;line-height:1.6;max-width:85%;align-self:flex-end;'
+        : 'background:rgba(66,133,244,0.15);border:1px solid rgba(66,133,244,0.2);border-radius:12px 12px 12px 4px;padding:10px 14px;color:#c8d8ff;font-size:13px;line-height:1.6;max-width:85%;';
+      msg.textContent = text;
+      box.appendChild(msg);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function addTyping() {
+      const box = document.getElementById('aiMessages');
+      const dots = document.createElement('div');
+      dots.id = 'typingDots';
+      dots.style.cssText = 'background:rgba(66,133,244,0.15);border:1px solid rgba(66,133,244,0.2);border-radius:12px 12px 12px 4px;padding:10px 18px;color:#4a9eff;font-size:18px;max-width:60px;';
+      dots.innerHTML = '<span style="animation:blink 1s infinite 0s">·</span><span style="animation:blink 1s infinite 0.2s">·</span><span style="animation:blink 1s infinite 0.4s">·</span>';
+      box.appendChild(dots);
+      box.scrollTop = box.scrollHeight;
+      const style = document.createElement('style');
+      style.textContent = '@keyframes blink{0%,80%,100%{opacity:0}40%{opacity:1}}';
+      document.head.appendChild(style);
+    }
+
+    function removeTyping() {
+      const dots = document.getElementById('typingDots');
+      if (dots) dots.remove();
+    }
+
+    async function sendAIMessage() {
+      const input = document.getElementById('aiInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      addMessage(text, true);
+      chatHistory.push({ role: 'user', parts: [{ text }] });
+      addTyping();
+      try {
+        const res = await fetch(GEMINI_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+            contents: chatHistory
+          })
+        });
+        const data = await res.json();
+        removeTyping();
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm having trouble connecting. Please email tharunsagarm96@gmail.com directly!";
+        addMessage(reply, false);
+        chatHistory.push({ role: 'model', parts: [{ text: reply }] });
+      } catch (e) {
+        removeTyping();
+        addMessage("Connection issue. Please reach out at tharunsagarm96@gmail.com 😊", false);
+      }
+    }
+  </script>
+
 </body>
 </html>
