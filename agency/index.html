@@ -610,7 +610,7 @@
       const message = document.getElementById('message').value;
       const sub = encodeURIComponent(`Project Inquiry from ${fname} ${lname}`);
       const body = encodeURIComponent(`Hi Tharun,\n\nName: ${fname} ${lname}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`);
-      window.open(`mailto:tharunsagarm96@gmail.com?subject=${sub}&body=${body}`, '_blank');
+      window.open(`mailto:tharunsagar.dev@gmail.com?subject=${sub}&body=${body}`, '_blank');
       document.getElementById('formSuccess').style.display = 'block';
       e.target.querySelector('.submit-btn').style.display = 'none';
       setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; e.target.querySelector('.submit-btn').style.display = 'block'; e.target.reset(); }, 4000);

@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const service = document.getElementById('formService').value;
       const message = document.getElementById('formMessage').value;
 
-      fetch("https://formsubmit.co/ajax/tharunsagarm96@gmail.com", {
+      fetch("https://formsubmit.co/ajax/tharunsagar.dev@gmail.com", {
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
