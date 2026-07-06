@@ -22,24 +22,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursor = document.getElementById('cursor');
   const cursorFollower = document.getElementById('cursorFollower');
   let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
   let followerX = 0, followerY = 0;
+  let hasMoved = false;
+
+  // Hide cursor on load to prevent top-left glitch
+  if (cursor && cursorFollower) {
+    cursor.style.opacity = '0';
+    cursorFollower.style.opacity = '0';
+    cursor.style.transition = 'opacity 0.3s ease';
+    cursorFollower.style.transition = 'opacity 0.3s ease, transform 0.15s ease, width 0.3s ease, height 0.3s ease';
+  }
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
+    
+    if (!hasMoved) {
+      hasMoved = true;
+      if (cursor && cursorFollower) {
+        cursor.style.opacity = '1';
+        cursorFollower.style.opacity = '0.5';
+      }
+    }
   });
 
-  // Smooth follower
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.12;
-    followerY += (mouseY - followerY) * 0.12;
-    cursorFollower.style.left = followerX + 'px';
-    cursorFollower.style.top = followerY + 'px';
-    requestAnimationFrame(animateFollower);
+  // Hardware-accelerated cursor animations
+  function updateCursorAnimations() {
+    if (cursor && cursorFollower) {
+      cursorX += (mouseX - cursorX) * 0.3;
+      cursorY += (mouseY - cursorY) * 0.3;
+      cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+
+      followerX += (mouseX - followerX) * 0.12;
+      followerY += (mouseY - followerY) * 0.12;
+      cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+    }
+    requestAnimationFrame(updateCursorAnimations);
   }
-  animateFollower();
+  requestAnimationFrame(updateCursorAnimations);
 
   // Hover effects
   const hoverEls = document.querySelectorAll('a, button, .service-card, .work-card, .filter-btn');
@@ -567,6 +588,21 @@ document.addEventListener('DOMContentLoaded', () => {
     title.style.transform = 'translateY(20px)';
     title.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     titleObserver.observe(title);
+  });
+
+  // ============================================
+  // 19. CALENDLY MODAL WIREUP
+  // ============================================
+  const calendlyButtons = document.querySelectorAll('a[href*="calendly.com"]');
+  calendlyButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof openBooking === 'function') {
+        openBooking();
+      } else {
+        window.open(btn.href, '_blank', 'noopener,noreferrer');
+      }
+    });
   });
 
   console.log('%c✨ Portfolio Loaded — Tharun Sagar', 'color: #DC143C; font-size: 16px; font-weight: bold;');

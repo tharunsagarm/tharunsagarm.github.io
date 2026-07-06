@@ -62,7 +62,7 @@ section { position: relative; overflow: hidden; }
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 .cursor-follower {
   width: 36px; height: 36px;
@@ -72,7 +72,7 @@ section { position: relative; overflow: hidden; }
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
   opacity: 0.5;
 }
 .cursor.active { width: 20px; height: 20px; }
@@ -1577,6 +1577,14 @@ section { position: relative; overflow: hidden; }
 .booking-modal.active {
   opacity: 1; visibility: visible;
   transform: translate(-50%, -50%) scale(1);
+}
+.booking-modal.booking-modal-calendly {
+  max-width: 760px;
+  height: 85vh;
+  padding: 0;
+  overflow: hidden;
+  background: #1a1a24;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
 }
 .booking-close {
   position: absolute; top: 16px; right: 20px;
