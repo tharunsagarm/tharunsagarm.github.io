@@ -173,8 +173,33 @@ section { position: relative; overflow: hidden; }
   transform: translateY(-2px);
   box-shadow: 0 8px 30px var(--red-glow);
 }
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 1px; transition: var(--transition); }
+
+/* Mobile nav open state */
+@media (max-width: 768px) {
+  .navbar { padding: 16px 24px; }
+  .navbar.scrolled { padding: 12px 24px; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-red);
+    flex-direction: column;
+    padding: 20px 24px 24px;
+    gap: 0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { border-bottom: 1px solid var(--border); }
+  .nav-links li:last-child { border-bottom: none; }
+  .nav-link { display: block; padding: 14px 0; font-size: 16px; font-weight: 600; color: var(--text); }
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+}
 
 /* ---- BUTTONS ---- */
 .btn {
@@ -1979,4 +2004,129 @@ section { position: relative; overflow: hidden; }
   background: #000000;
   border-color: #000000;
   color: #ffffff;
+}
+
+/* ============================================
+   TECH STACK — TOOLTIPS
+   ============================================ */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+.tech-item {
+  position: relative;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+  cursor: default;
+  transition: var(--transition);
+  box-shadow: var(--shadow-card);
+}
+.tech-item:hover {
+  border-color: var(--border-red);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(220,20,60,0.12);
+}
+.tech-icon { font-size: 28px; margin-bottom: 8px; }
+.tech-name { font-size: 12px; font-weight: 600; color: var(--text-2); }
+
+/* Tooltip */
+.tech-item[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: #1a1a2e;
+  color: #e8e8f8;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  max-width: 220px;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4;
+}
+.tech-item[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1a1a2e;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 101;
+}
+.tech-item[data-tooltip]:hover::after,
+.tech-item[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ============================================
+   NEW TESTIMONIAL CARDS
+   ============================================ */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+@media (max-width: 768px) {
+  .testimonial-grid { grid-template-columns: 1fr; }
+}
+.testimonial-stars {
+  color: #f5c518;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--red-dark), var(--red));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.testimonial-name {
+  font-size: 15px; font-weight: 700;
+  color: var(--text);
+}
+.testimonial-role {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+.testimonial-badge {
+  margin-left: auto;
+  padding: 4px 12px;
+  background: rgba(0,180,80,0.08);
+  border: 1px solid rgba(0,180,80,0.25);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1a7a3a;
 }
