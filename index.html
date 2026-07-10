@@ -1111,22 +1111,46 @@ Always end with a helpful follow-up question or action.`;
     }
 
     function getFallbackReply(text) {
-      const t = text.toLowerCase();
-      if (t.includes('price') || t.includes('cost') || t.includes('charge') || t.includes('how much'))
-        return "ðŸ’° Projects typically range from $200â€“$800 depending on scope and complexity. Landing pages start at $200, SaaS features from $300, and full dashboards from $500. Want a quick estimate? Drop Tharun a message on WhatsApp: +91 89716 90481";
-      if (t.includes('service') || t.includes('offer') || t.includes('build') || t.includes('what do'))
-        return "ðŸ›  Tharun builds: React SaaS dashboards, onboarding flows, AI integrations (Gemini/OpenAI), Shopify customizations, landing pages, and full-stack web apps. He ships in 3â€“7 days. Which of these do you need?";
-      if (t.includes('project') || t.includes('portfolio') || t.includes('work') || t.includes('example'))
-        return "ðŸ–¼ Check out his live portfolio at https://tharunsagarm.github.io â€” it includes real estate platforms, design tools, SaaS dashboards, and AI-powered apps. Want to know about a specific type of project?";
-      if (t.includes('hire') || t.includes('contact') || t.includes('talk') || t.includes('reach'))
-        return "ðŸ¤ Best way to start: Book a free 20-min call at https://calendly.com/tharunsagarm96/30min â€” or message on WhatsApp: +91 89716 90481. Tharun usually replies within 1â€“2 hours!";
-      if (t.includes('whatsapp') || t.includes('phone') || t.includes('call'))
-        return "ðŸ“± You can reach Tharun on WhatsApp at +91 89716 90481 â€” it's the fastest way to connect. Or book a free consultation at https://calendly.com/tharunsagarm96/30min";
-      if (t.includes('email'))
-        return "ðŸ“§ Email Tharun at tharunsagar.dev@gmail.com â€” mention your project idea and he'll reply within a few hours!";
-      if (t.includes('time') || t.includes('long') || t.includes('fast') || t.includes('deadline'))
-        return "âš¡ Most projects ship in 3â€“7 days. Larger builds may take 2 weeks. Tharun works fast and communicates daily â€” you'll always know what's happening!";
-      return "I'm Tharun's AI assistant! I can answer questions about his services, pricing, past work, or help you get in touch. What would you like to know?";
+      const t = text.toLowerCase().trim();
+
+      // Casual / greeting messages
+      if (t.match(/^(hi|hey|hello|good|ok|okay|cool|great|nice|thanks|thank you|awesome|sure|yes|no|got it|alright|sounds good|perfect|wow|sup|hiya|howdy)[\.\!]*$/))
+        return "Thanks for reaching out! 😊 Got a project in mind, or curious about what Tharun builds? Ask away!";
+
+      // Pricing
+      if (t.includes('price') || t.includes('cost') || t.includes('charge') || t.includes('how much') || t.includes('rate') || t.includes('budget'))
+        return "💰 Projects typically range from $200–$800 depending on scope. Landing pages start at $200, SaaS features from $300, and full dashboards from $500. Want a quick estimate? Message on WhatsApp: +91 89716 90481";
+
+      // Services
+      if (t.includes('service') || t.includes('offer') || t.includes('build') || t.includes('what do') || t.includes('what can') || t.includes('skill') || t.includes('tech') || t.includes('stack'))
+        return "🛠 Tharun builds React SaaS dashboards, onboarding flows, AI integrations, Shopify stores, landing pages, and full-stack web apps — shipped in 3–7 days. Which do you need?";
+
+      // Portfolio / work
+      if (t.includes('project') || t.includes('portfolio') || t.includes('work') || t.includes('example') || t.includes('show') || t.includes('demo'))
+        return "🖼 Check out the live portfolio at https://tharunsagarm.github.io — real estate platforms, SaaS dashboards, AI tools, and more. Want details on a specific project?";
+
+      // Hiring / contact
+      if (t.includes('hire') || t.includes('contact') || t.includes('talk') || t.includes('reach') || t.includes('start') || t.includes('interested') || t.includes('get in touch'))
+        return "🤝 Great! Best way to start: book a free 20-min call at https://calendly.com/tharunsagarm96/30min — or message directly on WhatsApp: +91 89716 90481. Tharun usually replies within 1–2 hours!";
+
+      // WhatsApp / phone
+      if (t.includes('whatsapp') || t.includes('phone') || t.includes('number') || t.includes('mobile'))
+        return "📱 WhatsApp: +91 89716 90481 — fastest way to connect! Or book a free call at https://calendly.com/tharunsagarm96/30min";
+
+      // Email
+      if (t.includes('email') || t.includes('mail'))
+        return "📧 Email: tharunsagar.dev@gmail.com — mention your project idea and Tharun will reply within a few hours!";
+
+      // Timeline
+      if (t.includes('time') || t.includes('how long') || t.includes('fast') || t.includes('quick') || t.includes('deadline') || t.includes('when'))
+        return "⚡ Most projects ship in 3–7 days. Larger builds may take up to 2 weeks. Tharun works fast and updates you daily!";
+
+      // Tech
+      if (t.includes('react') || t.includes('node') || t.includes('javascript') || t.includes('next') || t.includes('shopify') || t.includes('ai') || t.includes('gemini'))
+        return "💻 Tharun specializes in React, Node.js, Gemini AI, Next.js, and Shopify. Want to know how he can use these for your project?";
+
+      // Default
+      return "Happy to help! 😊 Ask about Tharun's services, pricing, past projects, or how to get started — what's on your mind?";
     }
   </script>
 
