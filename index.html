@@ -996,7 +996,7 @@ Always end with a helpful follow-up question or action.`;
       if (aiPanelOpen) {
         badge.style.display = 'none';
         if (document.getElementById('aiMessages').children.length === 0) {
-          addBotMessage("ðŸ‘‹ Hey! I'm Tharun's AI assistant. I can answer questions about his services, pricing, and past work â€” or help you get in touch. What would you like to know?");
+          addBotMessage("Hey! I'm Tharun's AI assistant. I can answer questions about his services, pricing, and past work — or help you get in touch. What would you like to know?");
         }
         setTimeout(() => document.getElementById('aiInput').focus(), 100);
       }
@@ -1014,23 +1014,37 @@ Always end with a helpful follow-up question or action.`;
       msgs.scrollTop = msgs.scrollHeight;
     }
 
+    function cleanMarkdown(text) {
+      return text
+        .replace(/#{1,6}\s*/g, '')          // remove ## headers
+        .replace(/\*\*(.+?)\*\*/g, '$1')    // remove **bold**
+        .replace(/\*(.+?)\*/g, '$1')         // remove *italic*
+        .replace(/`(.+?)`/g, '$1')           // remove `code`
+        .replace(/^[-*]\s+/gm, '• ')         // convert - bullet to •
+        .replace(/\n{3,}/g, '\n\n')          // collapse triple newlines
+        .trim();
+    }
+
     function addBotMessage(text) {
       const msgs = document.getElementById('aiMessages');
       const div = document.createElement('div');
       div.className = 'ai-bubble';
       div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;';
 
-      // Convert URLs to clickable links
-      const linkedText = text.replace(/(https?:\/\/[^\s]+)/g,
+      // Clean markdown first, then linkify URLs
+      const clean = cleanMarkdown(text);
+      const withLinks = clean.replace(/(https?:\/\/[^\s]+)/g,
         '<a href="$1" target="_blank" style="color:#4a9eff;text-decoration:underline;">$1</a>');
+      // Preserve line breaks
+      const formatted = withLinks.replace(/\n/g, '<br>');
 
       div.innerHTML = `
         <div style="width:28px;height:28px;border-radius:50%;flex-shrink:0;margin-top:2px;
           background:linear-gradient(135deg,#4285f4,#0f9d58);
-          display:flex;align-items:center;justify-content:center;font-size:13px;">âœ¦</div>
+          display:flex;align-items:center;justify-content:center;font-size:14px;">🤖</div>
         <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(66,133,244,0.2);
           color:rgba(220,232,255,0.9);padding:10px 14px;border-radius:4px 16px 16px 16px;
-          font-size:13px;max-width:85%;line-height:1.6;">${linkedText}</div>`;
+          font-size:13px;max-width:85%;line-height:1.6;">${formatted}</div>`;
       msgs.appendChild(div);
       msgs.scrollTop = msgs.scrollHeight;
     }
