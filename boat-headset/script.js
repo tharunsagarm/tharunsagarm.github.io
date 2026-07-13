@@ -15,7 +15,24 @@ document.addEventListener('DOMContentLoaded', () => {
     grey: 'PRO'
   };
 
-  // 1. CLICK TO ACTIVATE COLUMN & SYNC COLOR
+  // 1. INITIALIZE COLUMNS BACKGROUNDS & SYNC DEFAULT STATE
+  columns.forEach(column => {
+    const bg = column.getAttribute('data-bg');
+    if (bg) {
+      column.style.backgroundColor = bg;
+    }
+  });
+
+  // Set initial watermark text based on default active column
+  const initialActive = document.querySelector('.color-column.active');
+  if (initialActive) {
+    const initialColor = initialActive.getAttribute('data-color');
+    if (brandNames[initialColor]) {
+      bgBrandText.textContent = brandNames[initialColor];
+    }
+  }
+
+  // 2. CLICK TO ACTIVATE COLUMN & SYNC COLOR
   columns.forEach(column => {
     column.addEventListener('click', () => {
       // Avoid re-triggering if already active

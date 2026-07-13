@@ -238,9 +238,19 @@ body {
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Hover effect on collapsed columns */
-.color-column:not(.active):hover .headset-img-wrap {
-  transform: scale(1.08) translateY(-10px);
+/* Hover effect on collapsed columns (Accordion Elastic Motion for Desktop only) */
+@media (min-width: 969px) {
+  .columns-container:hover .color-column:not(.active):hover {
+    flex: 1.4;
+  }
+
+  .columns-container:hover .color-column.active:not(:hover) {
+    flex: 2.6;
+  }
+
+  .color-column:not(.active):hover .headset-img-wrap {
+    transform: scale(1.1) translateY(-15px);
+  }
 }
 
 /* Active State layout details */
