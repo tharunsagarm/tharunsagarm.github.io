@@ -606,6 +606,24 @@ body {
     height: 600px;
   }
   
+  /* Collapsed column adjustments on mobile */
+  .color-column:not(.active) .product-badge,
+  .color-column:not(.active) .headset-title,
+  .color-column:not(.active) .headset-subtitle,
+  .color-column:not(.active) .product-info-panel {
+    display: none;
+  }
+  
+  .color-column:not(.active) .headset-img-wrap {
+    height: 110px;
+    margin: 0;
+  }
+  
+  .color-column:not(.active) .column-content {
+    justify-content: center;
+    height: 100%;
+  }
+  
   .column-content {
     flex-direction: row;
     flex-wrap: wrap;
