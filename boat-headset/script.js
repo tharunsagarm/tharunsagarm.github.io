@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const columns = document.querySelectorAll('.color-column');
+  const columnsContainer = document.querySelector('.columns-container');
   const heroSection = document.querySelector('.hero-section');
   const bgBrandText = document.getElementById('bgBrandText');
 
@@ -15,7 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     grey: 'PRO'
   };
 
-  // 1. INITIALIZE COLUMNS BACKGROUNDS & SYNC DEFAULT STATE
+  const defaultBg = '#121214'; // Neutral dark theme when none active
+  const defaultText = 'BOAT';
+
+  // 1. INITIALIZE COLUMNS BACKGROUNDS
   columns.forEach(column => {
     const bg = column.getAttribute('data-bg');
     if (bg) {
@@ -23,25 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Set initial watermark text based on default active column
-  const initialActive = document.querySelector('.color-column.active');
-  if (initialActive) {
-    const initialColor = initialActive.getAttribute('data-color');
-    if (brandNames[initialColor]) {
-      bgBrandText.textContent = brandNames[initialColor];
-    }
-  }
+  // Set initial default theme background
+  heroSection.style.setProperty('--theme-bg', defaultBg);
+  bgBrandText.textContent = defaultText;
 
-  // 2. CLICK TO ACTIVATE COLUMN & SYNC COLOR
+  // 2. HOVER (MOUSEENTER) ON COLUMNS TO ACTIVATE
   columns.forEach(column => {
-    column.addEventListener('click', () => {
-      // Avoid re-triggering if already active
-      if (column.classList.contains('active')) return;
-
+    column.addEventListener('mouseenter', () => {
       // Remove active states
       columns.forEach(col => col.classList.remove('active'));
 
-      // Add active state to clicked column
+      // Add active state to hovered column
       column.classList.add('active');
 
       // Sync primary background color variable
@@ -55,12 +51,27 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           bgBrandText.textContent = brandNames[colorId];
           bgBrandText.style.opacity = '1';
-        }, 300); // match fade transition
+        }, 150);
       }
     });
   });
 
-  // 2. SCROLL REVEAL INTERSECTION OBSERVER
+  // 3. MOUSELEAVE CONTAINER TO RESET ACCORDION TO EQUAL WIDTHS
+  columnsContainer.addEventListener('mouseleave', () => {
+    // Remove active states from all columns
+    columns.forEach(col => col.classList.remove('active'));
+
+    // Reset background color and text
+    heroSection.style.setProperty('--theme-bg', defaultBg);
+    
+    bgBrandText.style.opacity = '0';
+    setTimeout(() => {
+      bgBrandText.textContent = defaultText;
+      bgBrandText.style.opacity = '1';
+    }, 150);
+  });
+
+  // 4. SCROLL REVEAL INTERSECTION OBSERVER
   const scrollCards = document.querySelectorAll('.reveal-on-scroll');
   
   const observerOptions = {
