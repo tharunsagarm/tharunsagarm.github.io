@@ -24,20 +24,73 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--font-main);
-  background: var(--white);
+  background: #f0f0f3;
   color: var(--black);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #e5e5e7;
+  /* Premium paper noise/dot grid background texture */
+  background-image: radial-gradient(rgba(0,0,0,0.06) 1.2px, transparent 1.2px);
+  background-size: 30px 30px;
+  padding: 20px;
+}
+
+/* Tablet Device Frame Wrapper */
+.tablet-frame {
+  width: 100%;
+  max-width: 1280px;
+  height: 85vh;
+  background: var(--white);
+  border-radius: 36px;
+  border: 14px solid #1a1d20;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.35), 
+              inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep scroll behavior */
+.tablet-frame::-webkit-scrollbar {
+  width: 6px;
+}
+.tablet-frame::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tablet-frame::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* Tablet Camera Notch */
+.tablet-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 20px;
+  background: #1a1d20;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  z-index: 1000;
+  pointer-events: none;
 }
 
 /* ==========================================================================
    NAVIGATION
    ========================================================================== */
 .nav-bar {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -109,7 +162,7 @@ body {
    ========================================================================== */
 .hero-section {
   position: relative;
-  height: 100vh;
+  height: calc(85vh - 74px);
   width: 100%;
   display: flex;
   align-items: center;
@@ -117,7 +170,6 @@ body {
   background: var(--theme-bg);
   transition: var(--bg-transition);
   overflow: hidden;
-  padding-top: 80px; /* offset navbar */
 }
 
 /* Big diagonal brand watermark */
@@ -580,6 +632,36 @@ body {
    RESPONSIVE STYLING (MOBILE / TABLET)
    ========================================================================== */
 @media (max-width: 968px) {
+  html, body {
+    overflow: auto;
+  }
+  
+  body {
+    padding: 0;
+    background: var(--white);
+    display: block;
+  }
+
+  .tablet-frame {
+    max-width: 100%;
+    height: auto;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .tablet-notch {
+    display: none;
+  }
+
+  .nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
   .nav-links {
     display: none; /* simple mobile design */
   }
@@ -592,6 +674,7 @@ body {
     height: auto;
     min-height: 100vh;
     padding-bottom: 40px;
+    padding-top: 80px; /* space for fixed mobile nav */
   }
   
   .color-column {
