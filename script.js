@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let followerX = 0, followerY = 0;
   let hasMoved = false;
 
-  // Hide cursor on load to prevent top-left glitch
+  // Hide cursor on load to prevent top-left glitch and set cursor: none dynamically
   if (cursor && cursorFollower) {
+    document.body.style.cursor = 'none';
     cursor.style.opacity = '0';
     cursorFollower.style.opacity = '0';
     cursor.style.transition = 'opacity 0.3s ease';
@@ -122,7 +123,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('heroCanvas');
     if (!canvas || typeof THREE === 'undefined') return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    } catch (e) {
+      console.warn('WebGL/Three.js renderer failed to initialize. Falling back to background gradient.', e);
+      canvas.style.display = 'none';
+      return;
+    }
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 

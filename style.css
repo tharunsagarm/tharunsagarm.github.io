@@ -38,7 +38,6 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  cursor: none;
 }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
