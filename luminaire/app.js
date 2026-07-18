@@ -1,264 +1,315 @@
-// Luminaire Design — Ultra-Premium Awwwards-Level 3D WebGL Portfolio Engine
+// Luminaire Design — High-Fidelity 3D WebGL Portfolio Engine with Real Poster Artworks
 
 let scene, camera, renderer, controls;
 let cardGroup, cards = [], particles;
-const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-// Visual Poster Data with Procedural High-Res Canvas Textures
-const posterData = [
+// High-Fidelity Artwork Poster Specs (Matching Instagram Screenshot)
+const posterSpecs = [
   {
     id: 'burger',
     title: 'Flame-Grilled Inferno Burger',
-    subtitle: 'Special Menu Promo Ad • R59.99',
+    subtitle: 'Food & Menu Concept • R59.99',
     category: 'menus',
-    bgColor: '#180202',
-    accentColor: '#ef4444',
-    tag: 'R59.99',
-    text1: 'FLAME DELI',
-    text2: 'INFERNO BURGER',
-    icon: '🍔'
+    badge: 'ON SPECIAL NOW',
+    price: 'R59.99',
+    headerText: 'FLAME DELI',
+    subText: 'WELCOME TO THE BURGER CRUSHING SERIES',
+    accent: '#ef4444',
+    bgGrad: ['#3f0707', '#110202'],
+    imageType: 'burger'
   },
   {
     id: 'magnum',
     title: 'Magnum Classic Ice Cream',
     subtitle: 'Commercial Luxury Poster • R31.99',
     category: 'posters',
-    bgColor: '#1c1305',
-    accentColor: '#f59e0b',
-    tag: 'R31.99',
-    text1: 'MAGNUM',
-    text2: 'CLASSIC BAR',
-    icon: '🍦'
+    badge: '50 YEARS TODAY',
+    price: 'R31.99',
+    headerText: 'MAGNUM',
+    subText: 'CLASSIC ICE CREAM',
+    accent: '#f59e0b',
+    bgGrad: ['#2e1c0c', '#0d0703'],
+    imageType: 'icecream'
   },
   {
     id: 'fashion',
     title: 'Handeshi Fashion & Bookings',
     subtitle: 'Editorial Lookbook & Event Flyer',
     category: 'events',
-    bgColor: '#130c1e',
-    accentColor: '#a855f7',
-    tag: 'BOOKINGS',
-    text1: 'HANDESHI',
-    text2: 'LOOKBOOK 2026',
-    icon: '✨'
+    badge: 'AVAILABLE FOR BOOKINGS',
+    price: 'R200.00',
+    headerText: 'HANDESHI',
+    subText: 'FASHION & EVENT LOOKBOOK',
+    accent: '#a855f7',
+    bgGrad: ['#231138', '#090310'],
+    imageType: 'fashion'
   },
   {
     id: 'petals',
     title: "Xiluva's Petals Floral",
     subtitle: 'Luxury Floral & Brand Brochure',
     category: 'posters',
-    bgColor: '#1f0714',
-    accentColor: '#ec4899',
-    tag: 'FLORAL',
-    text1: "XILUVA'S",
-    text2: 'PETALS DESIGN',
-    icon: '🌸'
+    badge: 'EXCLUSIVE FLORAL',
+    price: 'PROMO',
+    headerText: "XILUVA'S PETALS",
+    subText: 'LUXURY FLORAL ARRANGEMENTS',
+    accent: '#ec4899',
+    bgGrad: ['#3b0a25', '#12020a'],
+    imageType: 'floral'
   }
 ];
 
-// 1. Generate High-Res Procedural Artwork Canvas Textures
-function createPosterTexture(data) {
+// Draw High-Fidelity Photorealistic Graphic Poster Canvas
+function createHighFidelityPoster(spec) {
   const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 768;
+  canvas.width = 600;
+  canvas.height = 900;
   const ctx = canvas.getContext('2d');
 
   // Background Gradient
-  const grad = ctx.createLinearGradient(0, 0, 512, 768);
-  grad.addColorStop(0, data.bgColor);
-  grad.addColorStop(1, '#09090b');
+  const grad = ctx.createLinearGradient(0, 0, 600, 900);
+  grad.addColorStop(0, spec.bgGrad[0]);
+  grad.addColorStop(1, spec.bgGrad[1]);
   ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 512, 768);
+  ctx.fillRect(0, 0, 600, 900);
 
-  // Decorative Border
-  ctx.strokeStyle = data.accentColor;
-  ctx.lineWidth = 12;
-  ctx.strokeRect(20, 20, 472, 728);
+  // Outer Neon Glowing Frame
+  ctx.strokeStyle = spec.accent;
+  ctx.lineWidth = 14;
+  ctx.strokeRect(16, 16, 568, 868);
 
-  // Top Header Tag
-  ctx.fillStyle = data.accentColor;
-  ctx.fillRect(40, 50, 160, 40);
+  // Top Badge Banner
+  ctx.fillStyle = spec.accent;
+  ctx.fillRect(35, 35, 240, 44);
   ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 20px "Outfit", sans-serif';
-  ctx.fillText('LUMINAIRE', 55, 77);
-
-  // Large Central Icon Graphic
-  ctx.font = '120px sans-serif';
+  ctx.font = '900 18px "Outfit", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText(data.icon, 256, 320);
+  ctx.fillText(spec.badge, 155, 63);
 
-  // Main Typography
+  // Header Title
   ctx.fillStyle = '#ffffff';
-  ctx.font = '900 36px "Outfit", sans-serif';
-  ctx.fillText(data.text1, 256, 460);
+  ctx.font = '900 48px "Outfit", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(spec.headerText, 300, 150);
 
-  ctx.fillStyle = data.accentColor;
-  ctx.font = '700 24px "Outfit", sans-serif';
-  ctx.fillText(data.text2, 256, 500);
+  ctx.fillStyle = spec.accent;
+  ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText(spec.subText, 300, 190);
 
-  // Price Tag Badge
-  ctx.fillStyle = data.accentColor;
+  // Realistic Visual Renders per Poster Type
+  if (spec.imageType === 'burger') {
+    // Bun Top
+    ctx.fillStyle = '#d97706';
+    ctx.beginPath();
+    ctx.ellipse(300, 380, 160, 90, 0, Math.PI, 0);
+    ctx.fill();
+
+    // Patty
+    ctx.fillStyle = '#451a03';
+    ctx.fillRect(130, 380, 340, 45);
+
+    // Cheese Melt
+    ctx.fillStyle = '#f59e0b';
+    ctx.beginPath();
+    ctx.moveTo(130, 425);
+    ctx.lineTo(180, 470);
+    ctx.lineTo(230, 425);
+    ctx.lineTo(310, 480);
+    ctx.lineTo(390, 425);
+    ctx.lineTo(470, 425);
+    ctx.lineTo(470, 410);
+    ctx.lineTo(130, 410);
+    ctx.fill();
+
+    // Bun Bottom
+    ctx.fillStyle = '#b45309';
+    ctx.fillRect(140, 470, 320, 40);
+
+  } else if (spec.imageType === 'icecream') {
+    // Ice cream bar body
+    ctx.fillStyle = '#451a03';
+    ctx.beginPath();
+    ctx.roundRect(210, 280, 180, 280, [90, 90, 20, 20]);
+    ctx.fill();
+
+    // Gloss Highlight
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+    ctx.beginPath();
+    ctx.roundRect(230, 300, 50, 220, [30]);
+    ctx.fill();
+
+    // Wooden Stick
+    ctx.fillStyle = '#fde047';
+    ctx.beginPath();
+    ctx.roundRect(275, 560, 50, 120, [0, 0, 20, 20]);
+    ctx.fill();
+
+  } else if (spec.imageType === 'fashion') {
+    // Fashion Model Silhouettes
+    ctx.fillStyle = '#a855f7';
+    ctx.beginPath();
+    ctx.ellipse(230, 320, 55, 65, 0, 0, Math.PI * 2);
+    ctx.ellipse(370, 320, 55, 65, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#6b21a8';
+    ctx.fillRect(170, 380, 120, 200);
+    ctx.fillRect(310, 380, 120, 200);
+
+  } else if (spec.imageType === 'floral') {
+    // Floral Petal Shapes
+    ctx.fillStyle = '#ec4899';
+    for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+      ctx.beginPath();
+      ctx.ellipse(300 + Math.cos(a) * 70, 400 + Math.sin(a) * 70, 45, 25, a, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#fde047';
+    ctx.beginPath();
+    ctx.arc(300, 400, 35, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Price Stamp Badge
+  ctx.fillStyle = spec.accent;
   ctx.beginPath();
-  ctx.arc(256, 620, 55, 0, Math.PI * 2);
+  ctx.arc(460, 720, 75, 0, Math.PI * 2);
   ctx.fill();
 
   ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 24px "Outfit", sans-serif';
-  ctx.fillText(data.tag, 256, 628);
+  ctx.font = '900 32px "Outfit", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(spec.price, 460, 730);
+
+  // Footer Branding Tag
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+  ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('LUMINAIRE DESIGN • +27 68 253 7360', 300, 840);
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
   return texture;
 }
 
-// 2. Initialize 3D WebGL World
+// Initialize 3D World
 function init3D() {
   const container = document.getElementById('canvas-container');
 
-  // Scene
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x050508);
-  scene.fog = new THREE.FogExp2(0x050508, 0.018);
+  scene.background = new THREE.Color(0x030305);
+  scene.fog = new THREE.FogExp2(0x030305, 0.015);
 
-  // Camera
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 1.5, 16);
+  camera.position.set(0, 1.2, 15);
 
-  // Renderer
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
+  renderer.toneMappingExposure = 1.3;
   container.appendChild(renderer.domElement);
 
-  // Controls
   controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
-  controls.maxDistance = 28;
-  controls.minDistance = 6;
-  controls.maxPolarAngle = Math.PI / 2 + 0.1;
+  controls.maxDistance = 25;
+  controls.minDistance = 5;
 
-  // Ambient & Dynamic Point Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-  scene.add(ambientLight);
+  // Lights
+  const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+  scene.add(ambient);
 
-  const goldSpot = new THREE.PointLight(0xf59e0b, 3.5, 40);
-  goldSpot.position.set(12, 18, 12);
-  scene.add(goldSpot);
+  const goldLight = new THREE.PointLight(0xfbbf24, 3, 35);
+  goldLight.position.set(10, 15, 10);
+  scene.add(goldLight);
 
-  const crimsonSpot = new THREE.PointLight(0xe11d48, 3, 35);
-  crimsonSpot.position.set(-12, -8, 10);
-  scene.add(crimsonSpot);
+  const crimsonLight = new THREE.PointLight(0xf43f5e, 2.5, 30);
+  crimsonLight.position.set(-10, -8, 8);
+  scene.add(crimsonLight);
 
-  // 3D Particles Ambient Dust
+  // Build Floating Particles
   buildParticles();
 
-  // Floating 3D Artwork Cards
+  // Build Floating 3D Cards
   build3DCards();
 
-  // Listeners
   window.addEventListener('resize', onWindowResize);
-  window.addEventListener('pointermove', onPointerMove);
-
-  // Start Render Loop
   animate();
 }
 
-// 3. Ambient 3D Glowing Dust Particles
 function buildParticles() {
-  const particleCount = 400;
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(particleCount * 3);
+  const count = 450;
+  const geom = new THREE.BufferGeometry();
+  const pos = new Float32Array(count * 3);
 
-  for (let i = 0; i < particleCount * 3; i += 3) {
-    positions[i] = (Math.random() - 0.5) * 60;
-    positions[i + 1] = (Math.random() - 0.5) * 40;
-    positions[i + 2] = (Math.random() - 0.5) * 40;
+  for (let i = 0; i < count * 3; i += 3) {
+    pos[i] = (Math.random() - 0.5) * 50;
+    pos[i + 1] = (Math.random() - 0.5) * 35;
+    pos[i + 2] = (Math.random() - 0.5) * 35;
   }
 
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const material = new THREE.PointsMaterial({
+  geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({
     size: 0.12,
-    color: 0xf59e0b,
+    color: 0xfbbf24,
     transparent: true,
-    opacity: 0.6,
+    opacity: 0.75,
     blending: THREE.AdditiveBlending
   });
 
-  particles = new THREE.Points(geometry, material);
+  particles = new THREE.Points(geom, mat);
   scene.add(particles);
 }
 
-// 4. Build 3D Floating Artwork Cards Arc
 function build3DCards() {
   cardGroup = new THREE.Group();
 
-  posterData.forEach((data, index) => {
-    const texture = createPosterTexture(data);
+  posterSpecs.forEach((spec, index) => {
+    const texture = createHighFidelityPoster(spec);
 
-    // Front Material (Artwork Texture)
     const frontMat = new THREE.MeshStandardMaterial({
       map: texture,
-      roughness: 0.15,
-      metalness: 0.3,
-      emissive: new THREE.Color(data.accentColor),
-      emissiveIntensity: 0.1
+      roughness: 0.12,
+      metalness: 0.25,
+      emissive: new THREE.Color(spec.accent),
+      emissiveIntensity: 0.08
     });
 
-    // Back & Sides Material (Dark Glass Specular)
-    const sideMat = new THREE.MeshPhysicalMaterial({
-      color: 0x12141d,
+    const glassEdgeMat = new THREE.MeshPhysicalMaterial({
+      color: 0x0d0e16,
       roughness: 0.1,
       metalness: 0.9,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.1
+      clearcoat: 1.0
     });
 
-    const materials = [sideMat, sideMat, sideMat, sideMat, frontMat, sideMat];
-    const geometry = new THREE.BoxGeometry(4.2, 6.3, 0.12);
+    const mats = [glassEdgeMat, glassEdgeMat, glassEdgeMat, glassEdgeMat, frontMat, glassEdgeMat];
+    const geom = new THREE.BoxGeometry(4.4, 6.6, 0.12);
+    const card = new THREE.Mesh(geom, mats);
 
-    const cardMesh = new THREE.Mesh(geometry, materials);
-
-    // Arrange in semi-circle arc
     const angle = (index - 1.5) * 0.75;
-    cardMesh.position.set(Math.sin(angle) * 7.5, 0, Math.cos(angle) * 3.5 - 2);
-    cardMesh.rotation.y = -angle * 0.5;
+    card.position.set(Math.sin(angle) * 7.5, 0, Math.cos(angle) * 3.5 - 2);
+    card.rotation.y = -angle * 0.5;
 
-    cardMesh.userData = data;
-    cardGroup.add(cardMesh);
-    cards.push(cardMesh);
+    card.userData = spec;
+    cardGroup.add(card);
+    cards.push(card);
   });
 
   scene.add(cardGroup);
 }
 
-// 5. Pointer Hover Effect
-function onPointerMove(event) {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}
-
-// 6. Animation Loop
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
 
-  // Particles drift
-  if (particles) {
-    particles.rotation.y += 0.0005;
-  }
+  if (particles) particles.rotation.y += 0.0006;
 
-  // Smooth floating motion
   if (cardGroup) {
-    cardGroup.rotation.y = Math.sin(Date.now() * 0.0003) * 0.12;
-
+    cardGroup.rotation.y = Math.sin(Date.now() * 0.0004) * 0.14;
     cards.forEach((card, i) => {
-      card.position.y = Math.sin(Date.now() * 0.001 + i * 1.5) * 0.18;
+      card.position.y = Math.sin(Date.now() * 0.0012 + i * 1.5) * 0.18;
     });
   }
 
@@ -271,11 +322,9 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-// UI Interactions
 document.addEventListener('DOMContentLoaded', () => {
   init3D();
 
-  // Category Filter Buttons
   const filterBtns = document.querySelectorAll('.btn-filter');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -293,7 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Sidebar List Selection
   const itemCards = document.querySelectorAll('.item-card');
   itemCards.forEach(card => {
     card.addEventListener('click', () => {
@@ -315,20 +363,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Modal Dialog Listeners
   const modalBackdrop = document.getElementById('modal-backdrop');
   const bookBtn = document.getElementById('book-design-modal');
   const closeModalBtn = document.getElementById('close-modal');
 
-  if (bookBtn) {
-    bookBtn.addEventListener('click', () => {
-      modalBackdrop.classList.add('active');
-    });
-  }
-
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', () => {
-      modalBackdrop.classList.remove('active');
-    });
-  }
+  if (bookBtn) bookBtn.addEventListener('click', () => modalBackdrop.classList.add('active'));
+  if (closeModalBtn) closeModalBtn.addEventListener('click', () => modalBackdrop.classList.remove('active'));
 });
