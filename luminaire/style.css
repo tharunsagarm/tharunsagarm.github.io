@@ -1,13 +1,14 @@
-/* UI/UX Pro Max Design System Tokens for Luminaire Design */
+/* Luminaire Design — 21st.dev (Aceternity UI & Magic UI) Ultra-Premium Component Engine */
+
 :root {
-  --bg-dark: #09090b;
-  --panel-glass: rgba(18, 20, 29, 0.75);
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --accent-crimson: #e11d48;
-  --accent-gold: #f59e0b;
-  --accent-purple: #9333ea;
-  --text-main: #f4f4f5;
-  --text-muted: #a1a1aa;
+  --bg-dark: #030305;
+  --panel-glass: rgba(13, 14, 22, 0.82);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --accent-crimson: #f43f5e;
+  --accent-gold: #fbbf24;
+  --accent-cyan: #38bdf8;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
   --font-main: 'Outfit', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
 }
@@ -37,6 +38,20 @@ body {
   z-index: 1;
 }
 
+/* 21st.dev Aceternity Spotlight Background Overlay */
+body::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 30%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.18) 0%, rgba(251, 191, 36, 0.08) 50%, transparent 70%);
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
+}
+
 /* Spatial UI Overlay Layer */
 .spatial-ui {
   position: relative;
@@ -56,14 +71,30 @@ body {
   pointer-events: auto;
 }
 
-/* Glassmorphism Panel Utility */
+/* 21st.dev Aceternity Spotlight Glass Card */
 .glass-panel {
   background: var(--panel-glass);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-glass);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Aceternity Card Hover Glow Spotlight */
+.glass-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.4), rgba(251, 191, 36, 0.4), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* Top Header */
@@ -73,34 +104,34 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 14px 24px;
-  background: rgba(18, 20, 29, 0.8);
-  backdrop-filter: blur(16px);
+  background: rgba(13, 14, 22, 0.85);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--border-glass);
-  border-radius: 16px;
+  border-radius: 20px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .brand-logo {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   background: linear-gradient(135deg, var(--accent-crimson), var(--accent-gold));
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 22px;
   color: #fff;
-  box-shadow: 0 0 15px rgba(225, 29, 72, 0.4);
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.5);
 }
 
 .brand h2 {
   font-family: var(--font-main);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -109,7 +140,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   color: var(--accent-gold);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
 }
 
 .contact-header {
@@ -122,20 +153,21 @@ body {
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .social-pill:hover, .contact-pill:hover {
-  background: rgba(225, 29, 72, 0.2);
+  background: rgba(244, 63, 94, 0.2);
   border-color: var(--accent-crimson);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3);
 }
 
 /* Main Hero Layout */
@@ -147,54 +179,84 @@ body {
 }
 
 .main-panel {
-  width: 500px;
-  padding: 28px;
+  width: 520px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .section-badge {
   color: var(--accent-gold);
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .main-panel h1 {
   font-family: var(--font-main);
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-crimson), var(--accent-gold));
+  background: linear-gradient(135deg, var(--accent-crimson), var(--accent-gold), var(--accent-cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .tagline {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 
-/* Price Banner */
+/* 21st.dev Magic UI Animated Border Beam Price Tag Banner */
 .price-banner {
-  background: linear-gradient(135deg, rgba(225, 29, 72, 0.15), rgba(245, 158, 11, 0.15));
-  border: 1px solid rgba(225, 29, 72, 0.3);
-  padding: 14px 18px;
-  border-radius: 14px;
+  position: relative;
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  padding: 16px 20px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  overflow: hidden;
+}
+
+/* Magic UI Beam Keyframe Animation */
+.price-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent 0 340deg, var(--accent-gold) 360deg);
+  animation: border-beam 4s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+@keyframes border-beam {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.price-banner > * {
+  position: relative;
+  z-index: 1;
 }
 
 .price-tag {
   font-family: var(--font-main);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 900;
   color: var(--accent-gold);
   letter-spacing: -0.01em;
@@ -208,11 +270,11 @@ body {
 /* Filter Controls */
 .controls-group .label {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .filter-buttons {
@@ -225,51 +287,52 @@ body {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
   color: var(--text-main);
-  padding: 7px 12px;
-  border-radius: 10px;
+  padding: 8px 14px;
+  border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-filter:hover, .btn-filter.active {
   background: linear-gradient(135deg, var(--accent-crimson), var(--accent-gold));
   border-color: transparent;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(225, 29, 72, 0.35);
+  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.4);
 }
 
-/* Portfolio Item Cards */
+/* 21st.dev Aceternity UI 3D Card Pin Items */
 .portfolio-cards-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .item-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass);
-  padding: 10px 14px;
-  border-radius: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
 .item-card i {
-  font-size: 18px;
+  font-size: 20px;
   color: var(--accent-crimson);
-  width: 28px;
+  width: 30px;
 }
 
 .item-card h4 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -279,16 +342,17 @@ body {
 }
 
 .item-card:hover, .item-card.active {
-  background: rgba(225, 29, 72, 0.15);
+  background: rgba(244, 63, 94, 0.15);
   border-color: var(--accent-crimson);
-  transform: translateX(4px);
+  transform: translateX(6px) scale(1.01);
+  box-shadow: 0 10px 25px rgba(244, 63, 94, 0.25);
 }
 
-/* CTA Actions */
+/* 21st.dev Glowing Action Buttons */
 .cta-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .btn-primary {
@@ -296,54 +360,54 @@ body {
   background: linear-gradient(135deg, #25d366, #128c7e);
   color: #fff;
   border: none;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 13px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 14px;
   font-weight: 700;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
 }
 
 .btn-secondary {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border-glass);
   color: var(--text-main);
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 13px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* Helper Card Right */
 .helper-card {
-  width: 300px;
-  padding: 20px;
+  width: 320px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 
@@ -352,36 +416,37 @@ body {
   align-items: center;
   gap: 8px;
   color: var(--accent-gold);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 12px;
+  letter-spacing: 0.08em;
 }
 
 .quick-contacts {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   margin-top: 6px;
-  padding-top: 10px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-glass);
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 12px;
   color: var(--text-main);
 }
 
-/* Modal Backdrop & Box */
+/* Modal Dialog */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
   z-index: 100;
   display: none;
   align-items: center;
@@ -393,11 +458,11 @@ body {
 }
 
 .modal-box {
-  width: 400px;
-  padding: 28px;
+  width: 420px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .modal-header {
@@ -408,7 +473,7 @@ body {
 
 .modal-header h3 {
   font-family: var(--font-main);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--accent-gold);
 }
@@ -417,35 +482,34 @@ body {
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 24px;
+  font-size: 26px;
   cursor: pointer;
 }
 
 .modal-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
   margin: 12px 0;
 }
 
 .info-cell {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass);
-  padding: 10px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
 .info-cell .lbl { font-size: 11px; color: var(--text-muted); }
-.info-cell .val { font-size: 13px; font-weight: 700; color: var(--accent-gold); }
+.info-cell .val { font-size: 14px; font-weight: 700; color: var(--accent-gold); }
 
 .modal-btn { width: 100%; text-decoration: none; }
 
-/* Responsive adjustments */
 @media (max-width: 900px) {
-  .hero-layout { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-layout { flex-direction: column; align-items: stretch; gap: 14px; }
   .main-panel, .helper-card { width: 100%; }
   .spatial-ui { overflow-y: auto; pointer-events: auto; }
 }
