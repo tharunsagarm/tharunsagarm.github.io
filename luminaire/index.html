@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luminaire Design | 3D Interactive Visual Portfolio</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- Three.js, GSAP & OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+  <!-- 3D WebGL Canvas -->
+  <div id="canvas-container"></div>
+
+  <!-- Spatial Glass UI Overlay -->
+  <div class="spatial-ui">
+    
+    <!-- Top Navigation Header -->
+    <header class="header-glass">
+      <div class="brand">
+        <div class="brand-logo"><i class="fa-solid fa-lightbulb"></i></div>
+        <div>
+          <h2>LUMINAIRE DESIGN</h2>
+          <span class="sub-tag">BY MASINGITA • CREATIVE VISUALS</span>
+        </div>
+      </div>
+      <div class="contact-header">
+        <a href="https://instagram.com/luminaire_design" target="_blank" class="social-pill">
+          <i class="fa-brands fa-instagram"></i> @luminaire_design
+        </a>
+        <a href="mailto:luminairedesign9@gmail.com" class="contact-pill">
+          <i class="fa-solid fa-envelope"></i> luminairedesign9@gmail.com
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="hero-layout">
+      
+      <!-- Left Glass Control Panel -->
+      <div class="glass-panel main-panel">
+        <span class="section-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> 3D VISUAL SHOWCASE</span>
+        <h1>Bring Your Brand to <span class="gradient-text">Light & Life</span></h1>
+        <p class="tagline">
+          High-impact posters, flyers, event concepts, and creative visual designs engineered in interactive 3D.
+        </p>
+
+        <!-- Pricing Highlight Badge -->
+        <div class="price-banner">
+          <div class="price-tag">ALL DESIGNS JUST R200.00</div>
+          <span class="price-desc">Flyers • Posters • Menu Cards • Promotional Visuals</span>
+        </div>
+
+        <!-- 3D Scene Controls & Filters -->
+        <div class="controls-group">
+          <span class="label">EXPLORE 3D VISUAL CATEGORIES:</span>
+          <div class="filter-buttons">
+            <button class="btn-filter active" data-category="all"><i class="fa-solid fa-layer-group"></i> All Visuals</button>
+            <button class="btn-filter" data-category="posters"><i class="fa-solid fa-image"></i> Posters & Ads</button>
+            <button class="btn-filter" data-category="menus"><i class="fa-solid fa-utensils"></i> Menus & Food</button>
+            <button class="btn-filter" data-category="events"><i class="fa-solid fa-ticket"></i> Event Flyers</button>
+          </div>
+        </div>
+
+        <!-- Interactive Portfolio Items List -->
+        <div class="portfolio-cards-grid">
+          <div class="item-card active" data-item="burger">
+            <i class="fa-solid fa-burger"></i>
+            <div>
+              <h4>Flame-Grilled Inferno Burger</h4>
+              <span>Food & Menu Promo Ad</span>
+            </div>
+          </div>
+          <div class="item-card" data-item="magnum">
+            <i class="fa-solid fa-ice-cream"></i>
+            <div>
+              <h4>Magnum Classic Ice Cream</h4>
+              <span>Commercial Poster Ad</span>
+            </div>
+          </div>
+          <div class="item-card" data-item="fashion">
+            <i class="fa-solid fa-shirt"></i>
+            <div>
+              <h4>Handeshi Fashion & Bookings</h4>
+              <span>Model & Booking Flyer</span>
+            </div>
+          </div>
+          <div class="item-card" data-item="petals">
+            <i class="fa-solid fa-seedling"></i>
+            <div>
+              <h4>Xiluva's Petals Floral</h4>
+              <span>Brand & Floral Brochure</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Action Buttons -->
+        <div class="cta-actions">
+          <a href="https://wa.me/27682537360" target="_blank" class="btn-primary">
+            <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp (+27 68 253 7360)
+          </a>
+          <button class="btn-secondary" id="book-design-modal">
+            <i class="fa-solid fa-calendar-check"></i> Book Design Concept
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Right Side 3D Helper Card -->
+      <div class="glass-panel helper-card">
+        <div class="helper-header">
+          <i class="fa-solid fa-hand-pointer"></i>
+          <span>3D INTERACTION GUIDE</span>
+        </div>
+        <p>Click and drag your mouse on the 3D canvas to rotate the artwork cards in space. Click any card to inspect lighting reflections.</p>
+        
+        <div class="quick-contacts">
+          <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <span>+27 68 253 7360</span>
+          </div>
+          <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Available Worldwide (Digital Delivery)</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="glass-panel modal-box">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-lightbulb"></i> Order Custom Design</h3>
+        <button class="close-modal" id="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Ready to bring your business or event visual to light?</p>
+        <div class="modal-info-grid">
+          <div class="info-cell">
+            <span class="lbl">Design Rate</span>
+            <span class="val">R200.00 / Design</span>
+          </div>
+          <div class="info-cell">
+            <span class="lbl">Turnaround</span>
+            <span class="val">24-48 Hours</span>
+          </div>
+        </div>
+        <a href="https://wa.me/27682537360?text=Hi%20Luminaire%20Design!%20I%20saw%20your%203D%20portfolio%20and%20want%20to%20order%20a%20custom%20design." target="_blank" class="btn-primary modal-btn">
+          <i class="fa-brands fa-whatsapp"></i> Chat Direct on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

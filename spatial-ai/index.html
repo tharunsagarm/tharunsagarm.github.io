@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spatial AI 3D Villa Showcase | Tharun Sagar M</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- Three.js & OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+  <!-- Background Canvas -->
+  <div id="canvas-container"></div>
+
+  <!-- Glassmorphism Spatial UI Overlay -->
+  <div class="spatial-ui">
+    
+    <!-- Top Header -->
+    <header class="header-glass">
+      <div class="logo">
+        <span class="badge">SPATIAL AI WEB</span>
+        <h2>AURA VILLA 3D</h2>
+      </div>
+      <div class="status-pill">
+        <span class="live-dot"></span>
+        <span>GEMINI AI AGENT: ACTIVE</span>
+      </div>
+    </header>
+
+    <!-- Main Hero Split Content -->
+    <main class="content-split">
+      <div class="text-card glass-panel">
+        <span class="category-tag">ULTRA-LUXURY REAL ESTATE</span>
+        <h1>Experience Property in <span class="gradient-text">Spatial AI 3D</span></h1>
+        <p class="description">
+          Interact with the 3D villa below or ask our embedded Gemini AI Agent to customize lighting, switch property views, and auto-qualify your viewing appointment.
+        </p>
+
+        <!-- Interactive Preset Buttons -->
+        <div class="preset-controls">
+          <button class="btn-preset active" data-preset="day">
+            <i class="fa-solid fa-sun"></i> Day View
+          </button>
+          <button class="btn-preset" data-preset="sunset">
+            <i class="fa-solid fa-cloud-sun"></i> Sunset Mood
+          </button>
+          <button class="btn-preset" data-preset="night">
+            <i class="fa-solid fa-moon"></i> Night Mode
+          </button>
+        </div>
+
+        <!-- Property Features Grid -->
+        <div class="features-grid">
+          <div class="feature-box">
+            <span class="label">Living Space</span>
+            <span class="value">6,400 sq.ft</span>
+          </div>
+          <div class="feature-box">
+            <span class="label">Bedrooms</span>
+            <span class="value">5 Luxury Suites</span>
+          </div>
+          <div class="feature-box">
+            <span class="label">Price</span>
+            <span class="value">$2,450,000</span>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn-primary" id="open-ai-modal">
+            <i class="fa-solid fa-robot"></i> Chat with Spatial AI Agent
+          </button>
+          <a href="https://tharunsagarm.github.io" target="_blank" class="btn-secondary">
+            Developer Portfolio <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Spatial AI Agent Chat Drawer -->
+    <div class="ai-drawer glass-panel" id="ai-drawer">
+      <div class="drawer-header">
+        <div class="agent-info">
+          <div class="avatar"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <h3>Gemini Lead Assistant</h3>
+            <span class="subtext">Auto-qualifies buyers & changes 3D scene</span>
+          </div>
+        </div>
+        <button class="close-btn" id="close-ai-modal">&times;</button>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <div class="message message-ai">
+          Hello! I'm your Spatial AI Villa Assistant. Try saying: 
+          <br><em>"Switch to sunset lighting"</em> or <em>"Show me the master pool view"</em> or <em>"Book a property viewing"</em>.
+        </div>
+      </div>
+
+      <div class="chat-input-bar">
+        <input type="text" id="user-input" placeholder="Type prompt (e.g. 'sunset mood' or 'book viewing')...">
+        <button id="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

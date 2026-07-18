@@ -19,6 +19,28 @@
   },
   "homepage": "https://github.com/royalspeaker911-cmyk/portfolio#readme",
   "dependencies": {
-    "puppeteer": "^25.2.0"
+    "@google/generative-ai": "^0.24.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^3.0.4",
+    "@react-three/rapier": "^2.2.0",
+    "@sentry/react": "^10.66.0",
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.98",
+    "@studio-freight/lenis": "^1.0.42",
+    "@use-gesture/react": "^10.3.1",
+    "@welldone-software/why-did-you-render": "^10.0.1",
+    "eslint": "^10.7.0",
+    "framer-motion": "^12.42.2",
+    "gl-matrix": "^3.4.4",
+    "gsap": "^3.15.0",
+    "howler": "^2.2.4",
+    "n8ao": "^2.0.0",
+    "prettier": "^3.9.5",
+    "puppeteer": "^25.2.0",
+    "three": "^0.185.1",
+    "typescript": "^7.0.2",
+    "vite-plugin-glsl": "^1.6.0",
+    "web-vitals": "^5.3.0"
   }
 }
