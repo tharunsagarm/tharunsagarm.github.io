@@ -1118,11 +1118,11 @@ Always suggest WhatsApp as the fastest contact. End with a helpful question.`;
 
     const seenResponses = new Set();
     const dynamicFollowups = [
-      "\n\n💬 Got any specific features in mind? Feel free to ask!",
-      "\n\n⚡ You can also chat 1-on-1 with Tharun on WhatsApp: +91 89716 90481!",
-      "\n\n🚀 Want to see a custom concept or pricing breakdown?",
-      "\n\n✨ Ask me about Tharun's 3D WebGL scenes, OpsFlow™ AI or timelines!",
-      "\n\n📱 Direct WhatsApp link: https://wa.me/918971690481"
+      "<br><br>💬 Got any specific features in mind? Feel free to ask!",
+      "<br><br>⚡ You can also chat 1-on-1 with Tharun on WhatsApp: +91 89716 90481!",
+      "<br><br>🚀 Want to see a custom concept or pricing breakdown?",
+      "<br><br>✨ Ask me about Tharun's 3D WebGL scenes, OpsFlow™ AI or timelines!",
+      "<br><br>📱 Direct WhatsApp link: https://wa.me/918971690481"
     ];
 
     function pickVariety(options) {
@@ -1203,8 +1203,8 @@ Always suggest WhatsApp as the fastest contact. End with a helpful question.`;
       // 7. Pricing & Investment Tiers
       if (t.includes('price') || t.includes('cost') || t.includes('how much') || t.includes('rate') || t.includes('budget') || t.includes('pricing') || t.includes('package') || t.includes('tier')) {
         return pickVariety([
-          "Tharun offers 3 value-backed tiers:\n• Starter 3D / Web: $1,200 (5-7 days)\n• Full Stack 3D + AI Suite: $3,000 (14 days)\n• Dedicated Growth Retainer: $3,500/mo\nWant a custom quote? Chat on WhatsApp: +91 89716 90481!",
-          "Pricing is project-based with guaranteed ROI:\n- Starter 3D Landing Page: $1,200\n- Full Stack 3D + AI App: $3,000\n- Monthly Growth Partner: $3,500/mo\nDirect WhatsApp link: https://wa.me/918971690481",
+          "Tharun offers 3 value-backed tiers:<br>• Starter 3D / Web: $1,200 (5-7 days)<br>• Full Stack 3D + AI Suite: $3,000 (14 days)<br>• Dedicated Growth Retainer: $3,500/mo<br>Want a custom quote? Chat on WhatsApp: +91 89716 90481!",
+          "Pricing is project-based with guaranteed ROI:<br>- Starter 3D Landing Page: $1,200<br>- Full Stack 3D + AI App: $3,000<br>- Monthly Growth Partner: $3,500/mo<br>Direct WhatsApp link: https://wa.me/918971690481",
           "Tharun's packages range from $1,200 (Starter 3D Web) to $3,000 (Full Stack 3D + AI Suite), or $3,500/mo for a dedicated retainer. Need a custom estimate?"
         ]);
       }
@@ -1212,7 +1212,7 @@ Always suggest WhatsApp as the fastest contact. End with a helpful question.`;
       // 8. Services & Capabilities Overview
       if (t.includes('service') || t.includes('build') || t.includes('skill') || t.includes('what do') || t.includes('what can') || t.includes('offer')) {
         return pickVariety([
-          "Tharun delivers 5 core services:\n1) Interactive 3D Web (Three.js/GSAP)\n2) AI Automations (The OpsFlow™)\n3) UGC Video Ads\n4) Social Media Posters\n5) Pitch Deck Design\nWhich one fits your goals?",
+          "Tharun delivers 5 core services:<br>1) Interactive 3D Web (Three.js/GSAP)<br>2) AI Automations (The OpsFlow™)<br>3) UGC Video Ads<br>4) Social Media Posters<br>5) Pitch Deck Design<br>Which one fits your goals?",
           "Tharun's core stack covers 3D WebGL frontend, full-stack React/Next.js development, custom AI agent integrations, high-hook UGC ads, and brand collateral.",
           "From 60fps Three.js scenes to Make/n8n AI pipelines and viral UGC video ads, Tharun handles end-to-end creative & technical execution!"
         ]);
