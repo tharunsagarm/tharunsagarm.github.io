@@ -1116,76 +1116,141 @@ Always suggest WhatsApp as the fastest contact. End with a helpful question.`;
 
     function sendChip(text) { document.getElementById('aiInput').value=text; sendMessage(); }
 
+    let lastBotResponse = '';
+
+    function pickVariety(options) {
+      const available = options.filter(opt => opt !== lastBotResponse);
+      const chosen = available.length > 0 ? available[Math.floor(Math.random() * available.length)] : options[0];
+      lastBotResponse = chosen;
+      return chosen;
+    }
+
     function fallback(text) {
       const t = text.toLowerCase().trim();
 
       // 1. Natural Casual Greetings & How are you
       if (t.match(/^(hi|hey|hello|heyy|heya|hola|greetings|good morning|good afternoon|good evening|sup|yo)[.!]*$/) || t.includes('how are you') || t.includes('how r u') || t.includes('whats up') || t.includes("what's up")) {
-        return "Hey there! I'm doing great. 👋 I'm Tharun's AI assistant. How's your day going, and how can I help you today?";
+        return pickVariety([
+          "Hey there! I'm doing great. 👋 I'm Tharun's AI assistant. How's your day going, and how can I help you today?",
+          "Hello! Great to connect. 👋 What kind of project or idea are you exploring today?",
+          "Hey! Hope you're having a wonderful day. 👋 Ask me anything about Tharun's 3D web engineering or AI automations!"
+        ]);
       }
 
       // 2. Small Talk & Courtesy Responses
       if (t.match(/^(thanks|thank you|thx|ty|cool|awesome|great|nice|perfect|got it|sounds good|alright|ok|okay|sure|yes|no)[.!]*$/)) {
-        return "You're very welcome! 😊 Got any specific project ideas or questions about 3D web experiences, AI automation, or pricing?";
+        return pickVariety([
+          "You're very welcome! 😊 Got any specific project ideas or questions about 3D web experiences, AI automation, or pricing?",
+          "Glad I could help! 👍 Feel free to ask about timelines, past work, or book a quick chat on WhatsApp (+91 89716 90481).",
+          "Anytime! Let me know if you'd like to explore project demos, services, or custom estimates."
+        ]);
       }
 
       // 3. Identity & Creator Questions
       if (t.includes('who are you') || t.includes('your name') || t.includes('who made you') || t.includes('who created you') || t.includes('are you ai') || t.includes('are you real')) {
-        return "I'm Tharun Sagar's dedicated AI assistant! I'm built to help founders, startups, and clients learn about Tharun's 3D web engineering, AI automations, and how to get started.";
+        return pickVariety([
+          "I'm Tharun Sagar's dedicated AI assistant! I help founders and startups explore Tharun's 3D web builds, AI automations, and booking options.",
+          "I'm an AI companion built specifically for Tharun's portfolio to answer questions about his 5 core services, pricing, and project workflows!",
+          "I'm Tharun's portfolio AI assistant! Available 24/7 to guide you through his 3D web engineering, OpsFlow™ AI protocols, and WhatsApp booking."
+        ]);
       }
 
       // 4. Project Requests & Custom Ideas
       if (t.includes('i need') || t.includes('i want') || t.includes('can you build') || t.includes('can tharun build') || t.includes('my website') || t.includes('my app') || t.includes('project idea')) {
-        return "Awesome! Tharun loves building custom web apps, 3D landing pages, and AI workflows. Tell me a bit about your idea, or jump straight onto WhatsApp (+91 89716 90481) for a fast 1-on-1 quote!";
+        return pickVariety([
+          "Awesome! Tharun loves building custom web apps, 3D landing pages, and AI workflows. Tell me a bit about your idea, or message him directly on WhatsApp (+91 89716 90481) for a 1-on-1 quote!",
+          "That sounds like a great project! Tharun specializes in 60fps Three.js interfaces and automated AI pipelines. What features are you planning?",
+          "Sounds exciting! Tharun ships custom web builds in 5-7 days. Click here to chat specs on WhatsApp: https://wa.me/918971690481!"
+        ]);
       }
 
       // 5. 3D Web & Animations
       if (t.includes('3d') || t.includes('three') || t.includes('webgl') || t.includes('gsap') || t.includes('animation') || t.includes('shader')) {
-        return "Tharun crafts 60fps interactive 3D WebGL experiences using Three.js, React Three Fiber & GSAP that boost visitor engagement and conversion by 3x-5x!";
+        return pickVariety([
+          "Tharun crafts 60fps interactive 3D WebGL experiences using Three.js, React Three Fiber & GSAP that boost visitor engagement and conversion by 3x-5x!",
+          "With Three.js, WebGL shaders & GSAP timelines, Tharun transforms static websites into interactive 3D product showcases that capture attention immediately.",
+          "Looking for cutting-edge 3D web design? Tharun builds custom Three.js scenes, product configurators, and micro-animations optimized for mobile!"
+        ]);
       }
 
       // 6. AI Automations & Workflows
       if (t.includes('ai') || t.includes('automation') || t.includes('opsflow') || t.includes('bot') || t.includes('workflow') || t.includes('n8n') || t.includes('zapier')) {
-        return "Tharun engineers The OpsFlow™ AI Automation Protocol — connecting OpenAI/Gemini models with n8n/Make to automate lead scoring, customer support & operations (saving 30+ hrs/wk)!";
+        return pickVariety([
+          "Tharun engineers The OpsFlow™ AI Automation Protocol — connecting OpenAI/Gemini models with n8n/Make to automate lead scoring, customer support & operations (saving 30+ hrs/wk)!",
+          "Need smart AI workflows? Tharun builds custom AI chatbots, RAG search pipelines, and automated lead processing that scale your business overhead-free.",
+          "The OpsFlow™ protocol connects your CRM, email, and databases with custom AI agents to automate manual tasks 24/7."
+        ]);
       }
 
       // 7. Pricing & Investment Tiers
       if (t.includes('price') || t.includes('cost') || t.includes('how much') || t.includes('rate') || t.includes('budget') || t.includes('pricing') || t.includes('package') || t.includes('tier')) {
-        return "Tharun offers 3 value-backed tiers:\n• Starter 3D / Web: $1,200 (5-7 days)\n• Full Stack 3D + AI Suite: $3,000 (14 days)\n• Dedicated Growth Retainer: $3,500/mo\nWant a custom quote? Chat on WhatsApp: +91 89716 90481!";
+        return pickVariety([
+          "Tharun offers 3 value-backed tiers:\n• Starter 3D / Web: $1,200 (5-7 days)\n• Full Stack 3D + AI Suite: $3,000 (14 days)\n• Dedicated Growth Retainer: $3,500/mo\nWant a custom quote? Chat on WhatsApp: +91 89716 90481!",
+          "Pricing is project-based with guaranteed ROI:\n- Starter 3D Landing Page: $1,200\n- Full Stack 3D + AI App: $3,000\n- Monthly Growth Partner: $3,500/mo\nDirect WhatsApp link: https://wa.me/918971690481",
+          "Tharun's packages range from $1,200 (Starter 3D Web) to $3,000 (Full Stack 3D + AI Suite), or $3,500/mo for a dedicated retainer. Need a custom estimate?"
+        ]);
       }
 
       // 8. Services & Capabilities Overview
       if (t.includes('service') || t.includes('build') || t.includes('skill') || t.includes('what do') || t.includes('what can') || t.includes('offer')) {
-        return "Tharun delivers 5 core services:\n1) Interactive 3D Web (Three.js/GSAP)\n2) AI Automations (The OpsFlow™)\n3) UGC Video Ads\n4) Social Media Posters\n5) Pitch Deck Design\nWhich one fits your goals?";
+        return pickVariety([
+          "Tharun delivers 5 core services:\n1) Interactive 3D Web (Three.js/GSAP)\n2) AI Automations (The OpsFlow™)\n3) UGC Video Ads\n4) Social Media Posters\n5) Pitch Deck Design\nWhich one fits your goals?",
+          "Tharun's core stack covers 3D WebGL frontend, full-stack React/Next.js development, custom AI agent integrations, high-hook UGC ads, and brand collateral.",
+          "From 60fps Three.js scenes to Make/n8n AI pipelines and viral UGC video ads, Tharun handles end-to-end creative & technical execution!"
+        ]);
       }
 
       // 9. Work & Portfolio Examples
       if (t.includes('project') || t.includes('portfolio') || t.includes('work') || t.includes('example') || t.includes('case study') || t.includes('demo')) {
-        return "Explore Tharun's live work right here on the portfolio (3D E-commerce platforms, AI automation suites, viral UGC ads & agency sites). Want to discuss a custom build?";
+        return pickVariety([
+          "Explore Tharun's live work right here on the portfolio (3D E-commerce platforms, AI automation suites, viral UGC ads & agency sites). Want to discuss a custom build?",
+          "Check out the work section below to see real project case studies with ROI metrics (+22% conversion lift, 40+ hrs saved/wk). What type of project are you planning?",
+          "Tharun's portfolio showcases full-stack web apps, 3D interactive interfaces, and automated AI pipelines. Feel free to browse or ask about a specific tech!"
+        ]);
       }
 
       // 10. Contact & Booking
       if (t.includes('hire') || t.includes('contact') || t.includes('start') || t.includes('interested') || t.includes('book') || t.includes('call') || t.includes('chat') || t.includes('talk')) {
-        return "You can book a direct discovery call on WhatsApp (+91 89716 90481) or click here: https://wa.me/918971690481! Tharun usually responds in under 2 hours.";
+        return pickVariety([
+          "You can book a direct discovery call on WhatsApp (+91 89716 90481) or click here: https://wa.me/918971690481! Tharun usually responds in under 2 hours.",
+          "Ready to talk? Reach Tharun directly on WhatsApp: +91 89716 90481 or email tharunsagar.dev@gmail.com to discuss your timeline!",
+          "Great! Jump on a quick chat with Tharun on WhatsApp: https://wa.me/918971690481. He'll review your project goals and give you an exact estimate."
+        ]);
       }
 
       // 11. WhatsApp Contact
       if (t.includes('whatsapp') || t.includes('phone') || t.includes('number')) {
-        return "WhatsApp: +91 89716 90481 — click here to chat instantly: https://wa.me/918971690481!";
+        return pickVariety([
+          "WhatsApp: +91 89716 90481 — click here to chat instantly: https://wa.me/918971690481!",
+          "Fastest way to connect is WhatsApp (+91 89716 90481). Tharun responds within 1-2 hours!",
+          "Send a quick text on WhatsApp (+91 89716 90481) or open chat: https://wa.me/918971690481"
+        ]);
       }
 
       // 12. Email Contact
       if (t.includes('email') || t.includes('mail')) {
-        return "Email: tharunsagar.dev@gmail.com — feel free to send project specs or designs!";
+        return pickVariety([
+          "Email: tharunsagar.dev@gmail.com — feel free to send project specs or designs!",
+          "You can email your project brief to tharunsagar.dev@gmail.com — Tharun reviews emails daily!",
+          "Direct email: tharunsagar.dev@gmail.com. Don't forget to mention your target deadline!"
+        ]);
       }
 
       // 13. Timelines & Delivery
       if (t.includes('time') || t.includes('how long') || t.includes('fast') || t.includes('deadline') || t.includes('turnaround')) {
-        return "Landing pages ship in 5-7 days, and full-stack 3D + AI suites ship in a 14-day sprint with daily Slack/WhatsApp updates!";
+        return pickVariety([
+          "Landing pages ship in 5-7 days, and full-stack 3D + AI suites ship in a 14-day sprint with daily Slack/WhatsApp updates!",
+          "Tharun works in fast agile sprints: 5-7 days for Starter 3D Web, 14 days for Full Stack 3D + AI builds.",
+          "Turnaround is super fast — 5 to 14 days depending on scope, with daily milestone updates!"
+        ]);
       }
 
       // 14. Friendly Fallback
-      return "That sounds interesting! I can help you with Tharun's 3D web engineering, AI automations, project estimates, or booking a chat on WhatsApp (+91 89716 90481). What would you like to know more about?";
+      return pickVariety([
+        "That sounds interesting! I can help you with Tharun's 3D web engineering, AI automations, project estimates, or booking a chat on WhatsApp (+91 89716 90481). What would you like to know more about?",
+        "I'm here to help! Ask me about Tharun's 3D Web services, AI automations, pricing tiers, or click to chat on WhatsApp (+91 89716 90481).",
+        "Got questions about project turnaround, Three.js demos, or custom builds? Type away, or reach Tharun on WhatsApp (+91 89716 90481)!"
+      ]);
     }
   </script>
 
