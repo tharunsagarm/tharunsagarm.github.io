@@ -121,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   function initHeroCanvas() {
     const canvas = document.getElementById('heroCanvas');
-    if (!canvas || typeof THREE === 'undefined') return;
+    if (!canvas || typeof THREE === 'undefined' || canvas.hasAttribute('data-initialized')) return;
+    canvas.setAttribute('data-initialized', 'true');
 
     let renderer;
     try {

@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
 <body>
 
@@ -1131,6 +1132,140 @@ Always suggest WhatsApp as the fastest contact. End with a helpful question.`;
       // 14. Friendly Fallback
       return "That sounds interesting! I can help you with Tharun's 3D web engineering, AI automations, project estimates, or booking a chat on WhatsApp (+91 89716 90481). What would you like to know more about?";
     }
+  </script>
+
+  <!-- THREE.JS HERO 3D SCENE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas || typeof THREE === 'undefined' || canvas.hasAttribute('data-initialized')) return;
+      canvas.setAttribute('data-initialized', 'true');
+
+      // Scene setup
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Colors matching the portfolio
+      const RED = 0xDC143C;
+      const RED_LIGHT = 0xFF2D55;
+      const DARK = 0x1A1A1A;
+
+      // Main geometry — Torus Knot (represents complexity & creativity)
+      const torusGeometry = new THREE.TorusKnotGeometry(2.5, 0.6, 128, 32);
+      const torusMaterial = new THREE.MeshPhongMaterial({
+        color: RED,
+        transparent: true,
+        opacity: 0.12,
+        wireframe: true,
+        side: THREE.DoubleSide
+      });
+      const torusKnot = new THREE.Mesh(torusGeometry, torusMaterial);
+      torusKnot.position.set(6, 0, -5);
+      scene.add(torusKnot);
+
+      // Secondary geometry — Icosahedron (represents precision)
+      const icoGeometry = new THREE.IcosahedronGeometry(1.5, 1);
+      const icoMaterial = new THREE.MeshPhongMaterial({
+        color: RED_LIGHT,
+        transparent: true,
+        opacity: 0.08,
+        wireframe: true
+      });
+      const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
+      icosahedron.position.set(-5, 2, -3);
+      scene.add(icosahedron);
+
+      // Floating particles
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particleCount = 150;
+      const positions = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 30;
+        positions[i + 1] = (Math.random() - 0.5) * 20;
+        positions[i + 2] = (Math.random() - 0.5) * 15;
+      }
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const particlesMaterial = new THREE.PointsMaterial({
+        color: RED,
+        size: 0.04,
+        transparent: true,
+        opacity: 0.4,
+        sizeAttenuation: true
+      });
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
+      // Orbiting ring
+      const ringGeometry = new THREE.RingGeometry(3.5, 3.7, 64);
+      const ringMaterial = new THREE.MeshBasicMaterial({
+        color: RED,
+        transparent: true,
+        opacity: 0.06,
+        side: THREE.DoubleSide
+      });
+      const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+      ring.position.set(5, -1, -4);
+      ring.rotation.x = Math.PI * 0.4;
+      scene.add(ring);
+
+      // Lights
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+      const pointLight = new THREE.PointLight(RED, 1, 50);
+      pointLight.position.set(5, 5, 5);
+      scene.add(pointLight);
+      const pointLight2 = new THREE.PointLight(RED_LIGHT, 0.5, 50);
+      pointLight2.position.set(-5, -3, 3);
+      scene.add(pointLight2);
+
+      camera.position.z = 8;
+
+      // Mouse interaction
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const time = Date.now() * 0.001;
+
+        // Rotate geometries
+        torusKnot.rotation.x = time * 0.15;
+        torusKnot.rotation.y = time * 0.1;
+
+        icosahedron.rotation.x = time * 0.2;
+        icosahedron.rotation.y = time * 0.15;
+        icosahedron.position.y = 2 + Math.sin(time * 0.5) * 0.8;
+
+        ring.rotation.z = time * 0.08;
+
+        // Rotate particles slowly
+        particles.rotation.y = time * 0.03;
+        particles.rotation.x = time * 0.02;
+
+        // Mouse-reactive camera movement (subtle)
+        camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.02;
+        camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.02;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Responsive
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    });
   </script>
 </body>
 </html>
