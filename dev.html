@@ -938,6 +938,33 @@ Always suggest WhatsApp as the fastest contact. End with a helpful question.`;
       }
     }
 
+    const seenResponses = new Set();
+    const dynamicFollowups = [
+      "\n\n💬 Got any specific features in mind? Feel free to ask!",
+      "\n\n⚡ You can also chat 1-on-1 with Tharun on WhatsApp: +91 89716 90481!",
+      "\n\n🚀 Want to see a custom concept or pricing breakdown?",
+      "\n\n✨ Ask me about Tharun's 3D WebGL scenes, OpsFlow™ AI or timelines!",
+      "\n\n📱 Direct WhatsApp link: https://wa.me/918971690481"
+    ];
+
+    function pickVariety(options) {
+      // Find options never used in this session
+      let fresh = options.filter(opt => !seenResponses.has(opt));
+      let chosen = '';
+
+      if (fresh.length > 0) {
+        chosen = fresh[Math.floor(Math.random() * fresh.length)];
+      } else {
+        // If all options were used, pick a random base and append a fresh follow-up suffix
+        const base = options[Math.floor(Math.random() * options.length)];
+        const suffix = dynamicFollowups[seenResponses.size % dynamicFollowups.length];
+        chosen = base + suffix;
+      }
+
+      seenResponses.add(chosen);
+      return chosen;
+    }
+
     function addUserMsg(text) {
       const msgs = document.getElementById('aiMessages');
       const d = document.createElement('div');
