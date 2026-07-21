@@ -1088,6 +1088,15 @@ Always suggest WhatsApp as the fastest contact. End with a helpful question.`;
         return "Tharun engineers The OpsFlow™ AI Automation Protocol — connecting OpenAI/Gemini models with n8n/Make to automate lead scoring, customer support & operations (saving 30+ hrs/wk)!";
       }
 
+      // 6.5. Dedicated Negotiation & Discount Handler (Triggers BEFORE general pricing check)
+      if (t.includes('negotiate') || t.includes('discount') || t.includes('cheaper') || t.includes('too expensive') || t.includes('too high') || t.includes('lower') || t.includes('reduce') || t.includes('less') || t.includes('deal') || t.includes('offer') || t.includes('bargain') || t.includes('affordable')) {
+        return pickVariety([
+          "Tharun offers flexible project scoping for startups and early-stage founders! Jump on WhatsApp (+91 89716 90481) to discuss a custom scope fitted to your budget.",
+          "Quality and high conversion are top priorities! If your budget is tight, Tharun can customize the scope or offer a starter build. Let's chat on WhatsApp: https://wa.me/918971690481",
+          "Tharun keeps pricing honest and transparent. For custom startup packages or special scope adjustments, message Tharun 1-on-1 on WhatsApp (+91 89716 90481)!"
+        ]);
+      }
+
       // 7. Pricing & Investment Tiers
       if (t.includes('price') || t.includes('cost') || t.includes('how much') || t.includes('rate') || t.includes('budget') || t.includes('pricing') || t.includes('package') || t.includes('tier')) {
         return pickVariety([
